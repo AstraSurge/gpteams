@@ -20,6 +20,28 @@ const token = ref('')
 
 const disabled = computed(() => !token.value.trim() || loading.value)
 
+async function googleAuthCallback(response: any) {
+  const credential = response?.credential
+  if (!credential)
+    return
+
+  try {
+    loading.value = true
+    await fetchVerify(credential)
+    authStore.setToken(credential)
+    ms.success('success')
+    window.location.reload()
+  }
+  catch (error: any) {
+    ms.error(error.message ?? 'error')
+    authStore.removeToken()
+    token.value = ''
+  }
+  finally {
+    loading.value = false
+  }
+}
+
 async function handleVerify() {
   const secretKey = token.value.trim()
 
@@ -66,15 +88,22 @@ function handlePress(event: KeyboardEvent) {
         </header>
         <NInput v-model:value="token" type="text" placeholder="" @keypress="handlePress" />
 
-        <NButton
-          block
-          type="primary"
-          :disabled="disabled"
-          :loading="loading"
-          @click="handleVerify"
-        >
-          {{ $t('common.verify') }}
-        </NButton>
+        <div class="flex space-x-2 items-end">
+          <NButton
+            class="flex-1"
+            type="primary"
+            size="large"
+            :disabled="disabled"
+            :loading="loading"
+            @click="handleVerify"
+          >
+            {{ $t('common.verify') }}
+          </NButton>
+          <n-text strong class="text-xl">
+            or
+          </n-text>
+          <GoogleLogin :callback="googleAuthCallback" />
+        </div>
       </div>
     </div>
   </NModal>

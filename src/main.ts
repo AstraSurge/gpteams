@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import vue3GoogleLogin from 'vue3-google-login'
 import App from './App.vue'
 import { setupI18n } from './locales'
 import { setupAssets } from './plugins'
@@ -14,6 +15,10 @@ async function bootstrap() {
   setupI18n(app)
 
   await setupRouter(app)
+
+  app.use(vue3GoogleLogin, {
+    clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+  })
 
   app.mount('#app')
 }

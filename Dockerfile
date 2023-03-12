@@ -4,6 +4,10 @@ FROM node:lts-alpine AS builder
 COPY ./ /app
 WORKDIR /app
 
+ARG VITE_GOOGLE_CLIENT_ID
+
+ENV VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID
+
 RUN apk add --no-cache git \
     && npm install pnpm -g \
     && pnpm install \
