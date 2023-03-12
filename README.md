@@ -1,6 +1,6 @@
 # ChatGPT Web with google sign in
 
-![demo](./docs/demo.png)
+![demo](https://rorsch-1256426089.file.myqcloud.com/public/202303130217419.png)
 
 
 <div style="font-size: 1.5rem;">
