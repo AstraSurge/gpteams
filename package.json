@@ -64,7 +64,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,vue}": [
-      "pnpm lint:fix"
+      "yarn lint:fix"
     ]
   }
 }

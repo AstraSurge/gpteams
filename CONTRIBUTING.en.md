@@ -8,15 +8,14 @@ Each major change will be recorded in the `changelog`.
 
 ## Submitting Pull Request
 1. Fork [this repository](https://github.com/Chanzhaoyu/chatgpt-web) and create a branch from `main`. For new feature implementations, submit a pull request to the `feature` branch. For other changes, submit to the `main` branch.
-2. Install the `pnpm` tool using `npm install pnpm -g`.
-3. Install the `Eslint` plugin for `VSCode`, or enable `eslint` functionality for other editors such as `WebStorm`.
-4. Execute `pnpm bootstrap` in the root directory.
-5. Execute `pnpm install` in the `/service/` directory.
-6. Make changes to the codebase. If applicable, ensure that appropriate testing has been done.
-7. Execute `pnpm lint:fix` in the root directory to perform a code formatting check.
-8. Execute `pnpm type-check` in the root directory to perform a type check.
-9. Submit a git commit, following the [Commit Guidelines](#commit-guidelines).
-10. Submit a `pull request`. If there is a corresponding `issue`, please link it using the [linking-a-pull-request-to-an-issue keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword).
+2. Install the `Eslint` plugin for `VSCode`, or enable `eslint` functionality for other editors such as `WebStorm`.
+3. Execute `yarn bootstrap` in the root directory.
+4. Execute `yarn` in the `/service/` directory.
+5. Make changes to the codebase. If applicable, ensure that appropriate testing has been done.
+6. Execute `yarn lint:fix` in the root directory to perform a code formatting check.
+7. Execute `yarn type-check` in the root directory to perform a type check.
+8. Submit a git commit, following the [Commit Guidelines](#commit-guidelines).
+9. Submit a `pull request`. If there is a corresponding `issue`, please link it using the [linking-a-pull-request-to-an-issue keyword](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword).
 
 ## Commit Guidelines
 

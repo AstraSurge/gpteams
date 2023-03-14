@@ -8,15 +8,14 @@
 
 ## 提交 Pull Request
 1. Fork [此仓库](https://github.com/Chanzhaoyu/chatgpt-web)，从 `main` 创建分支。新功能实现请发 pull request 到 `feature` 分支。其他更改发到 `main` 分支。
-2. 使用 `npm install pnpm -g` 安装 `pnpm` 工具。
-3. `vscode` 安装了 `Eslint` 插件，其它编辑器如 `webStorm` 打开了 `eslint` 功能。
-4. 根目录下执行 `pnpm bootstrap`。
-5. `/service/` 目录下执行 `pnpm install`。
-6. 对代码库进行更改。如果适用的话，请确保进行了相应的测试。
-7. 请在根目录下执行 `pnpm lint:fix` 进行代码格式检查。
-8. 请在根目录下执行 `pnpm type-check` 进行类型检查。
-9. 提交 git commit, 请同时遵守 [Commit 规范](#commit-指南)
-10. 提交 `pull request`， 如果有对应的 `issue`，请进行[关联](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)。
+2. `vscode` 安装了 `Eslint` 插件，其它编辑器如 `webStorm` 打开了 `eslint` 功能。
+3. 根目录下执行 `yarn bootstrap`。
+4. `/service/` 目录下执行 `yarn install`。
+5. 对代码库进行更改。如果适用的话，请确保进行了相应的测试。
+6. 请在根目录下执行 `yarn lint:fix` 进行代码格式检查。
+7. 请在根目录下执行 `yarn type-check` 进行类型检查。
+8. 提交 git commit, 请同时遵守 [Commit 规范](#commit-指南)
+9. 提交 `pull request`， 如果有对应的 `issue`，请进行[关联](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)。
 
 ## Commit 指南
 
