@@ -17,11 +17,11 @@
     "start": "esno ./src/index.ts",
     "dev": "esno watch ./src/index.ts",
     "prod": "esno ./build/index.js",
-    "build": "pnpm clean && tsup",
+    "build": "yarn cache clean && tsup",
     "clean": "rimraf build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "common:cleanup": "rimraf node_modules && rimraf pnpm-lock.yaml"
+    "common:cleanup": "rimraf node_modules && rimraf yarn.lock"
   },
   "dependencies": {
     "chatgpt": "^5.0.10",

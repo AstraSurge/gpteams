@@ -18,8 +18,8 @@
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "bootstrap": "pnpm install && pnpm run common:prepare",
-    "common:cleanup": "rimraf node_modules && rimraf pnpm-lock.yaml",
+    "bootstrap": "yarn install && yarn run common:prepare",
+    "common:cleanup": "rimraf node_modules && rimraf yarn.lock",
     "common:prepare": "husky install"
   },
   "dependencies": {
