@@ -20,9 +20,26 @@
 - `AUTH_EMAIL_REGEX`, 必需。用于匹配邮箱的正则表达式。使用场景例子：你的公司/组织邮箱后缀为 @anarch.studio, 那么此处填写 `@anarch.studio$` 就可以让你的公司/组织朋友们和你一起使用了。
 
 - `CORS_ORIGIN`, 可选。HTTP 的 [Access-Control-Allow-Origin](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) 字段，用于跨域控制。
-
 ## 注意事项
 因为前端的变量是在编译时期注入的，所以使用 docker 部署的同学在构建时需要设置一下 build arg:
 ```sh
-sudo docker build --build-arg VITE_GOOGLE_CLIENT_ID=xxxxxxx.apps.googleusercontent.com -t  chatgpt-web . # 不要忘记将 xxxxxxx.apps.googleusercontent.com 替换为你自己的 google client id.
+sudo docker build --build-arg VITE_GOOGLE_CLIENT_ID=xxxxxxx.apps.googleusercontent.com -t  chatgpt-web . 
+# 不要忘记将 xxxxxxx.apps.googleusercontent.com 替换为你自己的 google client id.
 ```
+
+## 开发计划
+
+1. 通过集成 firebase 实现电话号码/邮箱登录。
+2. 通过集成 firebase 实现用户管理模块。
+
+如果你有好的想法可以[联系我](https://t.me/suikodev)。
+
+ps: 选择 firebase 的原因是因为 firebase 有免费额度足够小型团队使用。
+
+## 鸣谢
+
+[chatgpt-web 原项目](https://github.com/Chanzhaoyu/chatgpt-web)  
+[Redon](https://github.com/Chanzhaoyu)
+
+## License
+MIT © [Suiko](./license)

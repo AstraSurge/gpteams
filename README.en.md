@@ -24,5 +24,23 @@ Based on [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web), this version 
 ## IMPORTANT
 Since the front-end variables are injected at compile time, if you are deploying with Docker, you need to set the build arg during the build process as follows:
 ```sh
-sudo docker build --build-arg VITE_GOOGLE_CLIENT_ID=xxxxxxx.apps.googleusercontent.com -t  chatgpt-web . # Make sure to replace xxxxxxx.apps.googleusercontent.com with your own Google client ID.
+sudo docker build --build-arg VITE_GOOGLE_CLIENT_ID=xxxxxxx.apps.googleusercontent.com -t  chatgpt-web . 
+# Make sure to replace xxxxxxx.apps.googleusercontent.com with your own Google client ID.
 ```
+
+## ROADMAP
+
+1. Integrate Firebase to enable authentication via phone numbers or email addresses.
+2. Integrate Firebase to enable user management.
+
+Please feel free to [contact me](https://t.me/suikodev) if you have any innovative ideas to share.
+
+ps: Firebase is chosen because it provides sufficient free quota for small-scale team usage.
+
+## Thanks
+
+[chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web)  
+[Redon](https://github.com/Chanzhaoyu)
+
+## License
+MIT © [Suiko](./license)
