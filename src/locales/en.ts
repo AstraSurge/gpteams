@@ -25,7 +25,7 @@ export default {
     success: 'Success',
     failed: 'Failed',
     verify: 'Verify',
-    unauthorizedTips: 'Unauthorized, please verify first.',
+    signInTo: 'Sign in to {appName}',
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

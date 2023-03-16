@@ -25,7 +25,7 @@ export default {
     success: '操作成功',
     failed: '操作失敗',
     verify: '驗證',
-    unauthorizedTips: '未經授權，請先進行驗證。',
+    signInTo: '登入{appName}',
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',
