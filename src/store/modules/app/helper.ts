@@ -10,7 +10,7 @@ export type Language = 'zh-CN' | 'zh-TW' | 'en'
 export interface AppState {
   siderCollapsed: boolean
   theme: Theme
-  language: Language | string
+  language: Language
 }
 
 export function defaultSetting(): AppState {
