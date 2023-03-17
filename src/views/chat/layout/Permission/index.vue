@@ -7,6 +7,7 @@ import { phone } from 'phone'
 import PhoneInput from './PhoneInput.vue'
 import { fetchVerify } from '@/api'
 import { useAppStore, useAuthStore } from '@/store'
+import { t } from '@/locales'
 
 interface Props {
   visible: boolean
@@ -42,12 +43,16 @@ async function sendVerifyCode() {
     if (!auth)
       throw new Error('Firebase auth not initialized')
 
-    appVerifier.value = new RecaptchaVerifier(RECAPTCHA_BUTTON_ID, {
-      size: 'invisible',
-    }, auth)
+    if (!appVerifier.value) {
+      appVerifier.value = new RecaptchaVerifier(RECAPTCHA_BUTTON_ID, {
+        size: 'invisible',
+      }, auth)
+    }
+
     confirmationResult.value = await signInWithPhoneNumber(auth, phoneNumber.value, appVerifier.value)
+    ms.success(t('auth.verificationCodeSent'))
   }
-  catch (error) {
+  finally {
     appVerifier.value?.render().then((widgetId) => {
       grecaptcha.reset(widgetId)
     })

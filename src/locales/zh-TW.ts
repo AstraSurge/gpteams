@@ -87,5 +87,6 @@ export default {
     login: '登入',
     continue: '繼續',
     invalidVerificationCode: '驗證碼錯誤',
+    verificationCodeSent: '驗證碼已發送',
   },
 }

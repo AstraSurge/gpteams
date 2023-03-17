@@ -87,5 +87,6 @@ export default {
     login: 'Login',
     continue: 'Continue',
     invalidVerificationCode: 'Invalid verification code',
+    verificationCodeSent: 'Verification code sent',
   },
 }
