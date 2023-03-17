@@ -25,7 +25,6 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
-    signInTo: '登录{appName}',
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
@@ -80,5 +79,13 @@ export default {
     importRepeatContent: '内容重复跳过：{msg}',
     onlineImportWarning: '注意：请检查 JSON 文件来源！',
     downloadError: '请检查网络状态与 JSON 文件有效性',
+  },
+  auth: {
+    signInTo: '登录{appName}',
+    verificationCode: '验证码',
+    sendCode: '发送验证码',
+    login: '登录',
+    continue: '继续',
+    invalidVerificationCode: '验证码无效',
   },
 }

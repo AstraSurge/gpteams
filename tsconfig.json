@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "node", "naive-ui/volar"]
+    "types": ["vite/client", "node", "naive-ui/volar", "grecaptcha"]
   },
   "exclude": ["node_modules", "dist", "service"]
 }
