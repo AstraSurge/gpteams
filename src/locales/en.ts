@@ -88,5 +88,8 @@ export default {
     continue: 'Continue',
     invalidVerificationCode: 'Invalid verification code',
     verificationCodeSent: 'Verification code sent',
+    pleaseTryAgainLater: 'Please try again later',
+    invalidVerificationCodeOrExpired: 'Invalid verification code or expired',
+    phoneNumber: 'Phone Number',
   },
 }

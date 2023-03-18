@@ -2,9 +2,11 @@
 import { computed, ref } from 'vue'
 import { NButton, NInput, NInputGroup, NModal, NSpace, NText, useMessage } from 'naive-ui'
 import { useFirebaseAuth } from 'vuefire'
-import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth'
+import type { RecaptchaVerifier } from '@firebase/auth'
+import { signInWithPhoneNumber } from '@firebase/auth'
 import { phone } from 'phone'
 import PhoneInput from './PhoneInput.vue'
+import RecaptchaButton from './RecaptchaButton.vue'
 import { fetchVerify } from '@/api'
 import { useAppStore, useAuthStore } from '@/store'
 import { t } from '@/locales'
@@ -15,8 +17,6 @@ interface Props {
 
 defineProps<Props>()
 
-const RECAPTCHA_BUTTON_ID = 'recaptcha-button'
-
 const appName = import.meta.env.VITE_APP_NAME
 
 const { language } = useAppStore()
@@ -25,53 +25,40 @@ const authStore = useAuthStore()
 
 const ms = useMessage()
 
-const loading = ref(false)
+const submitLoading = ref(false)
 
 const verificationCode = ref('')
 const phoneNumber = ref('')
-const appVerifier = ref<RecaptchaVerifier>()
 const confirmationResult = ref()
-const submitDisabled = computed(() => !phoneNumber.value || !verificationCode.value.trim() || loading.value)
-const sendCodeDisabled = computed(() => !phoneNumber.value || loading.value || !phone(phoneNumber.value).isValid)
+const submitDisabled = computed(() => !phoneNumber.value || !verificationCode.value.trim() || submitLoading.value)
+const sendCodeDisabled = computed(() => !phoneNumber.value || submitLoading.value || !phone(phoneNumber.value).isValid)
 
 const auth = useFirebaseAuth()
 if (auth)
   auth.languageCode = language
 
-async function sendVerifyCode() {
-  try {
-    if (!auth)
-      throw new Error('Firebase auth not initialized')
-
-    if (!appVerifier.value) {
-      appVerifier.value = new RecaptchaVerifier(RECAPTCHA_BUTTON_ID, {
-        size: 'invisible',
-      }, auth)
-    }
-
-    confirmationResult.value = await signInWithPhoneNumber(auth, phoneNumber.value, appVerifier.value)
-    ms.success(t('auth.verificationCodeSent'))
+async function sendVerifyCode(verifier: RecaptchaVerifier) {
+  if (!auth) {
+    ms.error(t('auth.pleaseTryAgainLater'))
+    return
   }
-  finally {
-    appVerifier.value?.render().then((widgetId) => {
-      grecaptcha.reset(widgetId)
-    })
-  }
+  confirmationResult.value = await signInWithPhoneNumber(auth, phoneNumber.value, verifier)
+  ms.success(t('auth.verificationCodeSent'))
 }
 
 async function handleLogin() {
-  loading.value = true
+  submitLoading.value = true
   let token = ''
   try {
     const result = await confirmationResult.value?.confirm(verificationCode.value)
     token = await result.user.getIdToken()
   }
   catch {
-    ms.error('Invalid verification code')
+    ms.error(t('auth.invalidVerificationCode'))
   }
 
   if (!token) {
-    loading.value = false
+    submitLoading.value = false
     return
   }
 
@@ -85,7 +72,7 @@ async function handleLogin() {
     authStore.removeToken()
   }
   finally {
-    loading.value = false
+    submitLoading.value = false
   }
 }
 
@@ -111,16 +98,17 @@ function handlePress(event: KeyboardEvent) {
       <NSpace vertical size="large" class="m-auto max-w-md">
         <PhoneInput v-model:value="phoneNumber" />
         <NInputGroup>
-          <NInput v-model:value="verificationCode" placeholder="Verification Code" @keypress="handlePress" />
-          <NButton :id="RECAPTCHA_BUTTON_ID" :disabled="sendCodeDisabled" type="primary" @click="sendVerifyCode">
-            {{ $t("auth.sendCode") }}
-          </NButton>
+          <NInput v-model:value="verificationCode" :placeholder="t('auth.verificationCode')" @keypress="handlePress" />
+          <RecaptchaButton
+            :on-success="sendVerifyCode"
+            :disabled="sendCodeDisabled"
+          />
         </NInputGroup>
         <NButton
           type="primary"
           block
           :disabled="submitDisabled"
-          :loading="loading"
+          :loading="submitLoading"
           @click="handleLogin"
         >
           {{ $t('auth.login') }}

@@ -2,6 +2,7 @@
 import { ref, toRefs, watch } from 'vue'
 import { NInput, NInputGroup, NSelect } from 'naive-ui'
 import { countryPhoneData, phone } from 'phone'
+import { t } from '@/locales'
 
 interface Props {
   value: string
@@ -30,7 +31,7 @@ watch([phoneNumber, callingCode], () => {
 
 <template>
   <NInputGroup>
-    <NSelect v-model:value="callingCode" :style="{ width: '96px' }" placeholder="calling Code" filterable :options="options" />
-    <NInput v-model:value="phoneNumber" placeholder="Phone Number" />
+    <NSelect v-model:value="callingCode" :style="{ width: '96px' }" :consistent-menu-width="false" placeholder="calling Code" filterable :options="options" />
+    <NInput v-model:value="phoneNumber" :placeholder="t('auth.phoneNumber')" />
   </NInputGroup>
 </template>

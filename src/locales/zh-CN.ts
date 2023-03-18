@@ -88,5 +88,8 @@ export default {
     continue: '继续',
     invalidVerificationCode: '验证码无效',
     verificationCodeSent: '验证码已发送',
+    pleaseTryAgainLater: '请稍后再试',
+    invalidVerificationCodeOrExpired: '验证码无效或已过期',
+    phoneNumber: '手机号码',
   },
 }
