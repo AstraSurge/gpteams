@@ -1,7 +1,10 @@
 import path from 'path'
+import type { PluginOption } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
+
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig((env) => {
   const viteEnv = loadEnv(env.mode, process.cwd()) as unknown as ImportMetaEnv
@@ -13,6 +16,7 @@ export default defineConfig((env) => {
       },
     },
     plugins: [
+
       vue(),
       VitePWA({
         injectRegister: 'auto',
@@ -25,6 +29,7 @@ export default defineConfig((env) => {
           ],
         },
       }),
+      visualizer() as PluginOption,
     ],
     server: {
       host: '0.0.0.0',
