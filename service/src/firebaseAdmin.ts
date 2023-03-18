@@ -1,10 +1,9 @@
 import * as admin from 'firebase-admin'
-import { applicationDefault } from 'firebase-admin/app'
+
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON)
 
 admin.initializeApp({
-  // applicationDefault() will load credentials by environment variable:
-  // GOOGLE_APPLICATION_CREDENTIALS, which means path to service account key file
-  credential: applicationDefault(),
+  credential: admin.credential.cert(credentials),
 })
 
 export default admin
