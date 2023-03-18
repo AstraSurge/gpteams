@@ -91,5 +91,6 @@ export default {
     pleaseTryAgainLater: '请稍后再试',
     invalidVerificationCodeOrExpired: '验证码无效或已过期',
     phoneNumber: '手机号码',
+    logout: '退出登录',
   },
 }

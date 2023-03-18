@@ -91,5 +91,6 @@ export default {
     pleaseTryAgainLater: '請稍後再試',
     invalidVerificationCodeOrExpired: '驗證碼錯誤或已過期',
     phoneNumber: '手機號碼',
+    logout: '登出',
   },
 }

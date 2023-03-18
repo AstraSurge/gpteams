@@ -91,5 +91,6 @@ export default {
     pleaseTryAgainLater: 'Please try again later',
     invalidVerificationCodeOrExpired: 'Invalid verification code or expired',
     phoneNumber: 'Phone Number',
+    logout: 'Logout',
   },
 }
