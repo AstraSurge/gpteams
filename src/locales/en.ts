@@ -92,5 +92,7 @@ export default {
     invalidVerificationCodeOrExpired: 'Invalid verification code or expired',
     phoneNumber: 'Phone Number',
     logout: 'Logout',
+    signInWithGoogle: 'Sign in with Google',
+    or: 'Or',
   },
 }

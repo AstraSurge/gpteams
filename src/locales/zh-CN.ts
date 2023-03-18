@@ -92,5 +92,7 @@ export default {
     invalidVerificationCodeOrExpired: '验证码无效或已过期',
     phoneNumber: '手机号码',
     logout: '退出登录',
+    signInWithGoogle: '使用 Google 账号登录',
+    or: '或',
   },
 }

@@ -13,8 +13,15 @@ export async function verifyLogin(credential: string) {
       if (regex.test(decodedToken.phone_number))
         return true
     }
+
+    if (process.env.AUTH_EMAIL_REGEX) {
+      const decodedToken = await admin.auth().verifyIdToken(credential)
+      const regex = new RegExp(process.env.AUTH_EMAIL_REGEX)
+      if (regex.test(decodedToken.email))
+        return true
+    }
   }
-  catch {
+  catch (e) {
     return false
   }
   return false
