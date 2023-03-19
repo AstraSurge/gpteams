@@ -1,4 +1,5 @@
 import express from 'express'
+import history from 'connect-history-api-fallback'
 import type { ChatContext, ChatMessage } from './chatgpt'
 import { chatConfig, chatReplyProcess } from './chatgpt'
 import { auth, hasAuth, verifyLogin } from './middleware/auth'
@@ -8,6 +9,7 @@ const router = express.Router()
 
 app.use(express.static('public'))
 app.use(express.json())
+app.use(history())
 
 app.all('*', (_, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*')
