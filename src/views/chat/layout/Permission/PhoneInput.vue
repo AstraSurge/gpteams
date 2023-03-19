@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import { ref, toRefs, watch } from 'vue'
+import { onMounted, ref, toRefs, watch } from 'vue'
 import { NInput, NInputGroup, NSelect } from 'naive-ui'
 import { countryPhoneData, phone } from 'phone'
+import guessCallingCode from 'guess-calling-code'
 import { t } from '@/locales'
 
 interface Props {
@@ -14,12 +15,11 @@ const emit = defineEmits(['update:value'])
 const { value } = toRefs(props)
 
 const phoneNumber = ref(phone(value.value).phoneNumber)
-const callingCode = ref(`+${phone(value.value).countryCode || 1}`)
+const callingCode = ref(phone(value.value).countryCode ? `+${phone(value.value).countryCode}` : undefined)
 
-// TODO: pin some calling codes by user language
-const callingCodes = ['+1', '+86', '+852', '+886', ...countryPhoneData.map(i => `+${i.country_code}`)]
+const callingCodes = [...new Set([`+${guessCallingCode()}`, ...countryPhoneData.map(i => `+${i.country_code}`)])]
 
-const options = [...new Set(callingCodes)].map(i => ({
+const options = callingCodes.map(i => ({
   label: i,
   value: i,
 }))
@@ -27,6 +27,11 @@ const options = [...new Set(callingCodes)].map(i => ({
 watch([phoneNumber, callingCode], () => {
   emit('update:value', `${callingCode.value}${phoneNumber.value}`)
 }, { immediate: true, deep: true })
+
+onMounted(() => {
+  if (!callingCode.value)
+    callingCode.value = `+${guessCallingCode()}`
+})
 </script>
 
 <template>
