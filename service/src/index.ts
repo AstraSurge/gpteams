@@ -7,9 +7,11 @@ import { auth, hasAuth, verifyLogin } from './middleware/auth'
 const app = express()
 const router = express.Router()
 
+app.use(history({
+  index: '/',
+}))
 app.use(express.static('public'))
 app.use(express.json())
-app.use(history())
 
 app.all('*', (_, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*')
