@@ -44,8 +44,8 @@ The following variables are optional:
 
 The following variables must be set:
 
-- `OPENAI_API_KEY`: OpenAI API KEY
-- `GOOGLE_APPLICATION_CREDENTIALS_JSON`: The private key file in JSON string format is required. Please refer to the [Firebase official documentation](https://firebase.google.com/docs/admin/setup?hl=en) for this information. Example:
+- `OPENAI_API_KEY`: OpenAI API KEY, required.
+- `GOOGLE_APPLICATION_CREDENTIALS_JSON`: The private key file in JSON string format, required. Please refer to the [Firebase official documentation](https://firebase.google.com/docs/admin/setup?hl=en) for this information. Example:
 `
 '{"type": "service_account", "project_id": "xxx", "private_key_id": "xxx", "private_key": "xxx", "client_email": "xxx", "client_id": "xxx", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "xxx"}'`
 - `AUTH_MAIL_REGEX`: optional. Regular expression used to match email addresses. For example, if your company/organization email suffix is `@anarch.studio`, you should fill in `@anarch.studio$` so that your company/organization members can use GPTeams with you. Note that this variable may be removed in the next version as an admin management page will be added in the next version!

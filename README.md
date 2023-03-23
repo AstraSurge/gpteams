@@ -43,8 +43,8 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 
 以下变量是必需设置的：
 
-- `OPENAI_API_KEY`：OpenAI API KEY
-- `GOOGLE_APPLICATION_CREDENTIALS_JSON`：JSON 字符串格式的私钥文件必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
+- `OPENAI_API_KEY`：OpenAI API KEY, 必需。
+- `GOOGLE_APPLICATION_CREDENTIALS_JSON`：JSON 字符串格式的私钥文件, 必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
 `
 '{"type": "service_account", "project_id": "xxx", "private_key_id": "xxx", "private_key": "xxx", "client_email": "xxx", "client_id": "xxx", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "xxx"}'`
 - `AUTH_MAIL_REGEX`: 可选。用于匹配邮箱的正则表达式。例如，如果你的公司/组织邮箱后缀为 `@anarch.studio`，则应填写 `@anarch.studio$`，以便你的公司/组织成员和你一起使用 GPTeams。注意，基于下个版本会添加 admin 管理页面，此变量可能在下个版本中删除！
