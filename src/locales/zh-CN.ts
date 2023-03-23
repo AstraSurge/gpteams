@@ -25,7 +25,6 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
-    unauthorizedTips: '未经授权，请先进行验证。',
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
@@ -80,5 +79,20 @@ export default {
     importRepeatContent: '内容重复跳过：{msg}',
     onlineImportWarning: '注意：请检查 JSON 文件来源！',
     downloadError: '请检查网络状态与 JSON 文件有效性',
+  },
+  auth: {
+    signInTo: '登录{appName}',
+    verificationCode: '验证码',
+    sendCode: '发送验证码',
+    login: '登录',
+    continue: '继续',
+    invalidVerificationCode: '验证码无效',
+    verificationCodeSent: '验证码已发送',
+    pleaseTryAgainLater: '请稍后再试',
+    invalidVerificationCodeOrExpired: '验证码无效或已过期',
+    phoneNumber: '手机号码',
+    logout: '退出登录',
+    signInWithGoogle: '使用 Google 账号登录',
+    or: '或',
   },
 }

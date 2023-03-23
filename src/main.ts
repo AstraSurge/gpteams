@@ -1,10 +1,11 @@
 import { createApp } from 'vue'
-import vue3GoogleLogin from 'vue3-google-login'
+import { VueFire, VueFireAuth } from 'vuefire'
 import App from './App.vue'
 import { setupI18n } from './locales'
 import { setupAssets } from './plugins'
 import { setupStore } from './store'
 import { setupRouter } from './router'
+import { firebaseApp } from './firebase'
 
 async function bootstrap() {
   const app = createApp(App)
@@ -16,8 +17,12 @@ async function bootstrap() {
 
   await setupRouter(app)
 
-  app.use(vue3GoogleLogin, {
-    clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+  app.use(VueFire, {
+    firebaseApp,
+    modules: [
+      // ... other modules
+      VueFireAuth(),
+    ],
   })
 
   app.mount('#app')

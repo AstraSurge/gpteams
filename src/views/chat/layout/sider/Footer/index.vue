@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { defineAsyncComponent, ref } from 'vue'
+import LogoutButton from './LogoutButton.vue'
 import { HoverButton, SvgIcon, UserAvatar } from '@/components/common'
 
 const Setting = defineAsyncComponent(() => import('@/components/common/Setting/index.vue'))
@@ -12,11 +13,14 @@ const show = ref(false)
     <div class="flex-1 flex-shrink-0 overflow-hidden">
       <UserAvatar />
     </div>
-    <HoverButton :tooltip="$t('setting.setting')" @click="show = true">
-      <span class="text-xl text-[#4f555e] dark:text-white">
-        <SvgIcon icon="ri:settings-4-line" />
-      </span>
-    </HoverButton>
+    <div class="flex">
+      <LogoutButton />
+      <HoverButton :tooltip="$t('setting.setting')" @click="show = true">
+        <span class="text-xl text-[#4f555e] dark:text-white">
+          <SvgIcon icon="ri:settings-4-line" />
+        </span>
+      </HoverButton>
+    </div>
 
     <Setting v-if="show" v-model:visible="show" />
   </footer>

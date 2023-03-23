@@ -1,37 +1,27 @@
-import { OAuth2Client } from 'google-auth-library'
-
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
-
-export async function verifyGoogleCredentials(credential) {
-  const ticket = await client.verifyIdToken({
-    idToken: credential,
-  })
-  const payload = ticket.getPayload()
-  const regex = new RegExp(process.env.AUTH_EMAIL_REGEX)
-  return regex.test(payload.email)
-}
+import admin from 'src/firebaseAdmin'
 
 export function hasAuth() {
-  const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
-  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-  return !!AUTH_SECRET_KEY?.length || !!GOOGLE_CLIENT_ID?.length
+  // TODO: refactor hasAuth() related code，since we will integrate with firebase auth, and create a user management system
+  return true
 }
 
 export async function verifyLogin(credential: string) {
-  const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
-  const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-
   try {
-    if (!hasAuth())
-      return true
+    if (process.env.AUTH_PHONE_REGEX) {
+      const decodedToken = await admin.auth().verifyIdToken(credential)
+      const regex = new RegExp(process.env.AUTH_PHONE_REGEX)
+      if (regex.test(decodedToken.phone_number))
+        return true
+    }
 
-    if (AUTH_SECRET_KEY?.length > 0 && AUTH_SECRET_KEY === credential)
-      return true
-
-    if (GOOGLE_CLIENT_ID?.length > 0 && await verifyGoogleCredentials(credential))
-      return true
+    if (process.env.AUTH_EMAIL_REGEX) {
+      const decodedToken = await admin.auth().verifyIdToken(credential)
+      const regex = new RegExp(process.env.AUTH_EMAIL_REGEX)
+      if (regex.test(decodedToken.email))
+        return true
+    }
   }
-  catch {
+  catch (e) {
     return false
   }
   return false

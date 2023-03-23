@@ -30,3 +30,8 @@ coverage
 
 # Environment variables files
 /service/.env
+
+# bundle analyzer
+stats.html
+
+.env.sh

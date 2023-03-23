@@ -25,7 +25,6 @@ export default {
     success: 'Success',
     failed: 'Failed',
     verify: 'Verify',
-    unauthorizedTips: 'Unauthorized, please verify first.',
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',
@@ -80,5 +79,20 @@ export default {
     importRepeatContent: 'Content is repeatedly skipped: {msg}',
     onlineImportWarning: 'Note: Please check the JSON file source!',
     downloadError: 'Please check the network status and JSON file validity',
+  },
+  auth: {
+    signInTo: 'Sign in to {appName}',
+    verificationCode: 'Verification Code',
+    sendCode: 'Send Code',
+    login: 'Login',
+    continue: 'Continue',
+    invalidVerificationCode: 'Invalid verification code',
+    verificationCodeSent: 'Verification code sent',
+    pleaseTryAgainLater: 'Please try again later',
+    invalidVerificationCodeOrExpired: 'Invalid verification code or expired',
+    phoneNumber: 'Phone Number',
+    logout: 'Logout',
+    signInWithGoogle: 'Sign in with Google',
+    or: 'Or',
   },
 }

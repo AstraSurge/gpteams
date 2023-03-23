@@ -1,4 +1,5 @@
 import express from 'express'
+import history from 'connect-history-api-fallback'
 import type { ChatContext, ChatMessage } from './chatgpt'
 import { chatConfig, chatReplyProcess } from './chatgpt'
 import { auth, hasAuth, verifyLogin } from './middleware/auth'
@@ -6,6 +7,9 @@ import { auth, hasAuth, verifyLogin } from './middleware/auth'
 const app = express()
 const router = express.Router()
 
+app.use(history({
+  index: '/',
+}))
 app.use(express.static('public'))
 app.use(express.json())
 

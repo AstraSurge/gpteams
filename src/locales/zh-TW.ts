@@ -25,7 +25,6 @@ export default {
     success: '操作成功',
     failed: '操作失敗',
     verify: '驗證',
-    unauthorizedTips: '未經授權，請先進行驗證。',
   },
   chat: {
     placeholder: '來說點什麼...（Shift + Enter = 換行）',
@@ -80,5 +79,20 @@ export default {
     importRepeatContent: '因內容重複跳過：{msg}',
     onlineImportWarning: '注意：請檢查 JSON 檔案來源！',
     downloadError: '請檢查網路狀態與 JSON 檔案有效性',
+  },
+  auth: {
+    signInTo: '登入{appName}',
+    verificationCode: '驗證碼',
+    sendCode: '發送驗證碼',
+    login: '登入',
+    continue: '繼續',
+    invalidVerificationCode: '驗證碼錯誤',
+    verificationCodeSent: '驗證碼已發送',
+    pleaseTryAgainLater: '請稍後再試',
+    invalidVerificationCodeOrExpired: '驗證碼錯誤或已過期',
+    phoneNumber: '手機號碼',
+    logout: '登出',
+    signInWithGoogle: '使用 Google 登入',
+    or: '或',
   },
 }

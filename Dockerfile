@@ -11,10 +11,6 @@ RUN yarn --frozen-lockfile
 
 COPY . /app
 
-ARG VITE_GOOGLE_CLIENT_ID
-
-ENV VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID
-
 RUN yarn build
 
 # build backend
