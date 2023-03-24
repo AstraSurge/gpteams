@@ -5,14 +5,14 @@
 
 # GPTeams
 
-![GPTeams 登录页面](https://rorsch-1256426089.file.myqcloud.com/public/202303232058538.png)
+![GPTeams 登录页面](https://rorsch-1256426089.file.myqcloud.com/public/202303250636392.png)
 
 GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端，旨在为用户提供 OPEN AI 官方 ChatGPT 网站未涵盖的团队协作功能。
 
 ## 特点
 
 - 提供完全免费的部署方案，利用 Firebase 和 Vercel 服务进行部署，免费额度足以满足小型团队需求（待实现，已排期）。
-- 支持通过 Google 账户登录、电话号码登录以及电子邮箱登录（电子邮箱功能待实现，已排期）。
+- 支持通过 Google 账户登录、电话号码登录以及电子邮箱登录。
 - 设有管理员界面以便于管理用户，包括禁用用户、限制用户流量等功能（待实现，已排期）。
 - 用户可选择将本地某个会话同步至云端（待实现）。
 - 用户可将会话分享给团队中的其他成员（待实现）。

@@ -6,14 +6,14 @@
 
 # GPTeams
 
-![GPTeams Login Page](https://rorsch-1256426089.file.myqcloud.com/public/202303232058538.png)
+![GPTeams Login Page](https://rorsch-1256426089.file.myqcloud.com/public/202303250636392.png)
 
 GPTeams is a third-party client based on OpenAI API, customized for ChatGPT, providing team collaboration features not covered in the official OpenAI ChatGPT website.
 
 ## Features
 
 - Provides a completely free deployment solution using Firebase and Vercel services. The free quota is enough to meet the needs of small teams (to be implemented, already scheduled).
-- Supports login through Google account, phone number, and email (email function to be implemented, already scheduled).
+- Supports login through Google account, phone number, and email.
 - Equipped with an admin interface for user management, including disabling users, restricting user traffic, etc. (to be implemented, already scheduled).
 - Users can choose to sync a local conversation to the cloud (to be implemented).
 - Users can share conversations with other members of the team (to be implemented).
