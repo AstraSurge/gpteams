@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupPageGuard } from './permission'
 import { ChatLayout } from '@/views/chat/layout'
+import { FINISH_SIGN_IN_ROUTE } from '@/constants/routes'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -18,7 +19,11 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-
+  {
+    path: FINISH_SIGN_IN_ROUTE,
+    name: 'FinishSignIn',
+    component: () => import('@/views/finishSignIn/index.vue'),
+  },
   {
     path: '/404',
     name: '404',
