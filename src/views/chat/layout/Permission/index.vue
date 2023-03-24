@@ -1,13 +1,11 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
-import { NButton, NDivider, NInput, NInputGroup, NModal, NSpace, NText, useMessage } from 'naive-ui'
+import { NButton, NCheckbox, NDivider, NModal, NSpace, NText, useMessage } from 'naive-ui'
 import { useFirebaseAuth } from 'vuefire'
-import type { RecaptchaVerifier } from '@firebase/auth'
-import { signInWithPhoneNumber } from '@firebase/auth'
-import { phone } from 'phone'
-import PhoneInput from './PhoneInput.vue'
-import RecaptchaButton from './RecaptchaButton.vue'
+import { ref, watch } from 'vue'
+import { browserLocalPersistence, browserSessionPersistence } from '@firebase/auth'
+import PhoneSignIn from './PhoneSignIn/index.vue'
 import GoogleSignInButton from './GoogleSignInButton.vue'
+import EmailSignIn from './EmailSignIn.vue'
 import { fetchVerify } from '@/api'
 import { useAppStore, useAuthStore } from '@/store'
 import { t } from '@/locales'
@@ -18,6 +16,9 @@ interface Props {
 
 defineProps<Props>()
 
+const isUsingEmail = ref(false)
+const rememberMe = ref(false)
+
 const appName = import.meta.env.VITE_APP_NAME
 
 const { language } = useAppStore()
@@ -26,26 +27,14 @@ const authStore = useAuthStore()
 
 const ms = useMessage()
 
-const submitLoading = ref(false)
-
-const verificationCode = ref('')
-const phoneNumber = ref('')
-const confirmationResult = ref()
-const submitDisabled = computed(() => !phoneNumber.value || !verificationCode.value.trim() || submitLoading.value)
-const sendCodeDisabled = computed(() => !phoneNumber.value || submitLoading.value || !phone(phoneNumber.value).isValid)
-
 const auth = useFirebaseAuth()
 if (auth)
   auth.languageCode = language
 
-async function sendVerifyCode(verifier: RecaptchaVerifier) {
-  if (!auth) {
-    ms.error(t('auth.pleaseTryAgainLater'))
-    return
-  }
-  confirmationResult.value = await signInWithPhoneNumber(auth, phoneNumber.value, verifier)
-  ms.success(t('auth.verificationCodeSent'))
-}
+watch(() => rememberMe.value, (newRememberMe) => {
+  if (auth)
+    auth.setPersistence(newRememberMe ? browserLocalPersistence : browserSessionPersistence)
+})
 
 async function verifyToken(token: string) {
   try {
@@ -56,37 +45,6 @@ async function verifyToken(token: string) {
   catch (error: any) {
     ms.error(error.message ?? 'error')
     authStore.removeToken()
-  }
-}
-
-async function handleLogin() {
-  submitLoading.value = true
-  let token = ''
-  try {
-    const result = await confirmationResult.value?.confirm(verificationCode.value)
-    token = await result.user.getIdToken()
-  }
-  catch {
-    ms.error(t('auth.invalidVerificationCode'))
-  }
-
-  if (!token) {
-    submitLoading.value = false
-    return
-  }
-
-  try {
-    await verifyToken(token)
-  }
-  finally {
-    submitLoading.value = false
-  }
-}
-
-function handlePress(event: KeyboardEvent) {
-  if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault()
-    handleLogin()
   }
 }
 </script>
@@ -109,23 +67,16 @@ function handlePress(event: KeyboardEvent) {
             {{ t("auth.or") }}
           </span>
         </NDivider>
-        <PhoneInput v-model:value="phoneNumber" />
-        <NInputGroup>
-          <NInput v-model:value="verificationCode" :placeholder="t('auth.verificationCode')" @keypress="handlePress" />
-          <RecaptchaButton
-            :on-success="sendVerifyCode"
-            :disabled="sendCodeDisabled"
-          />
-        </NInputGroup>
-        <NButton
-          type="primary"
-          block
-          :disabled="submitDisabled"
-          :loading="submitLoading"
-          @click="handleLogin"
-        >
-          {{ $t('auth.login') }}
-        </NButton>
+        <PhoneSignIn v-if="!isUsingEmail" :on-success="verifyToken" />
+        <EmailSignIn v-else />
+        <div class="w-full flex justify-between">
+          <NCheckbox :checked="rememberMe" @update:checked="rememberMe = $event">
+            {{ t('auth.rememberMe') }}
+          </NCheckbox>
+          <NButton text type="primary" @click="isUsingEmail = !isUsingEmail">
+            {{ isUsingEmail ? t('auth.signInWithPhone') : t('auth.signInWithEmail') }}
+          </NButton>
+        </div>
       </NSpace>
     </div>
   </NModal>
