@@ -14,10 +14,12 @@ const emit = defineEmits(['update:value'])
 
 const { value } = toRefs(props)
 
+const userPossibleCallingCode = `+${guessCallingCode() || '86'}`
+
 const phoneNumber = ref(phone(value.value).phoneNumber)
 const callingCode = ref(phone(value.value).countryCode ? `+${phone(value.value).countryCode}` : undefined)
 
-const callingCodes = [...new Set([`+${guessCallingCode()}`, ...countryPhoneData.map(i => `+${i.country_code}`)])]
+const callingCodes = [...new Set([userPossibleCallingCode, ...countryPhoneData.map(i => `+${i.country_code}`)])]
 
 const options = callingCodes.map(i => ({
   label: i,
@@ -30,7 +32,7 @@ watch([phoneNumber, callingCode], () => {
 
 onMounted(() => {
   if (!callingCode.value)
-    callingCode.value = `+${guessCallingCode()}`
+    callingCode.value = userPossibleCallingCode
 })
 </script>
 
