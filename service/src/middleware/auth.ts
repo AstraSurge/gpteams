@@ -22,6 +22,7 @@ export async function verifyLogin(credential: string) {
     }
   }
   catch (e) {
+    console.error(e)
     return false
   }
   return false

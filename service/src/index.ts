@@ -1,3 +1,4 @@
+import './utils/loadEnv'
 import express from 'express'
 import history from 'connect-history-api-fallback'
 import type { ChatContext, ChatMessage } from './chatgpt'
