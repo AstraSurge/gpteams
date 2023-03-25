@@ -3,7 +3,9 @@
 </div>
 </br>
 
-# [GPTeams](https://chat.anarch.studio)
+[Live demo](https://gpteams.astrasurge.com) (Only [Astra Surge](https://astrasurge.com) organization emails can log in.)
+
+# GPTeams
 
 ![GPTeams Login Page](https://rorsch-1256426089.file.myqcloud.com/public/202303250636392.png)
 
@@ -17,7 +19,7 @@ GPTeams is a third-party client based on OpenAI API, customized for ChatGPT, pro
 - Users can choose to sync a local conversation to the cloud (to be implemented).
 - Users can share conversations with other members of the team (to be implemented).
 
-All of the above functions are included in the development plan, and you can check the progress on our [development board](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197). If you have any better suggestions or comments, please feel free to contact us at [opensource@anarch.studio](mailto:opensource@anarch.studio).
+All of the above functions are included in the development plan, and you can check the progress on our [development board](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197). If you have any better suggestions or comments, please feel free to contact us at [contact@astrasurge.com](mailto:contact@astrasurge.com).
 
 ## Quick Start
 
@@ -47,7 +49,7 @@ The following variables must be set:
 - `GOOGLE_APPLICATION_CREDENTIALS_JSON`: The private key file in JSON string format, required. Please refer to the [Firebase official documentation](https://firebase.google.com/docs/admin/setup?hl=en) for this information. Example:
 `
 '{"type": "service_account", "project_id": "xxx", "private_key_id": "xxx", "private_key": "xxx", "client_email": "xxx", "client_id": "xxx", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "xxx"}'`
-- `AUTH_MAIL_REGEX`: optional. Regular expression used to match email addresses. For example, if your company/organization email suffix is `@anarch.studio`, you should fill in `@anarch.studio$` so that your company/organization members can use GPTeams with you. Note that this variable may be removed in the next version as an admin management page will be added in the next version!
+- `AUTH_MAIL_REGEX`: optional. Regular expression used to match email addresses. For example, if your company/organization email suffix is `@astrasurge.com`, you should fill in `@astrasurge.com$` so that your company/organization members can use GPTeams with you. Note that this variable may be removed in the next version as an admin management page will be added in the next version!
 - `AUTH_PHONE_REGEX`: optional. Regular expression used to match phone numbers of users. Same effect as `AUTH_MAIL_REGEX`. Note that this variable may be removed in the next version as an admin management page will be added in the next version!
 
 For other variables, please refer to the README of the original [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) project.
@@ -68,4 +70,4 @@ PS: If you find the above steps too complicated, please wait patiently for the n
 [Redon](https://github.com/Chanzhaoyu)
 
 ## License
-MIT © [Anarch Studio](./license)
+MIT © [Astra Surge](./license)

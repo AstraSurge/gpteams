@@ -3,7 +3,9 @@
 </div>
 </br>
 
-# [GPTeams](https://chat.anarch.studio)
+[在线演示网站](https://gpteams.astrasurge.com) (只有 [Astra Surge](https://astrasurge.com) 成员的组织邮箱才能登录)
+
+# GPTeams
 
 ![GPTeams 登录页面](https://rorsch-1256426089.file.myqcloud.com/public/202303250636392.png)
 
@@ -17,7 +19,7 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 4. 用户可选择将本地某个会话同步至云端（待实现）。
 5. 用户可将会话分享给团队中的其他成员（待实现）。
 
-以上所述功能均已纳入开发计划，你可以在我们的 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 上查看进度。如果你有更好的建议或意见，请随时通过 [opensource@anarch.studio](mailto:opensource@anarch.studio) 联系我们。
+以上所述功能均已纳入开发计划，你可以在我们的 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 上查看进度。如果你有更好的建议或意见，请随时通过 [contact@astrasurge.com](mailto:contact@astrasurge.com) 联系我们。
 
 ## 快速开始
 
@@ -47,7 +49,7 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 - `GOOGLE_APPLICATION_CREDENTIALS_JSON`：JSON 字符串格式的私钥文件, 必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
 `
 '{"type": "service_account", "project_id": "xxx", "private_key_id": "xxx", "private_key": "xxx", "client_email": "xxx", "client_id": "xxx", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "xxx"}'`
-- `AUTH_MAIL_REGEX`: 可选。用于匹配邮箱的正则表达式。例如，如果你的公司/组织邮箱后缀为 `@anarch.studio`，则应填写 `@anarch.studio$`，以便你的公司/组织成员和你一起使用 GPTeams。注意，基于下个版本会添加 admin 管理页面，此变量可能在下个版本中删除！
+- `AUTH_MAIL_REGEX`: 可选。用于匹配邮箱的正则表达式。例如，如果你的公司/组织邮箱后缀为 `@astrasurge.com`，则应填写 `@astrasurge.com$`，以便你的公司/组织成员和你一起使用 GPTeams。注意，基于下个版本会添加 admin 管理页面，此变量可能在下个版本中删除！
 - `AUTH_PHONE_REGEX`: 可选。用户匹配电话号码的正则表达式。效果如 `AUTH_MAIL_REGEX`。注意，基于下个版本会添加 admin 管理页面，此变量可能在下个版本中删除！
 
 其他变量请参阅 [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) 原项目的 README。
@@ -69,4 +71,4 @@ PS: 如果你认为上述操作过于复杂，请耐心等待下一个小版本�
 [Redon](https://github.com/Chanzhaoyu)
 
 ## License
-MIT © [Anarch Studio](./license)
+MIT © [Astra Surge](./license)
