@@ -44,8 +44,8 @@ async function handleLogin() {
     ms.error(t('auth.invalidEmailLinkOrExpired'))
   }
   finally {
-    router.replace('/')
     window.localStorage.removeItem('emailForSignIn')
+    router.replace('/')
   }
 }
 
