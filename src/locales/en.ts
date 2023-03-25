@@ -106,5 +106,6 @@ export default {
     finishSignIn: 'Finish Sign In',
     finishSignInRequiredEmailTips: 'Opened link in another browser? Re-enter your email to complete sign-in.',
     welcomeBack: 'Welcome back',
+    returnToSignInPage: 'Return to sign-in page',
   },
 }

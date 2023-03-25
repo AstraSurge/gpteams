@@ -106,5 +106,6 @@ export default {
     finishSignIn: '完成登录',
     finishSignInRequiredEmailTips: '在其他浏览器打开链接？重新输入邮箱完成登录。',
     welcomeBack: '欢迎回来',
+    returnToSignInPage: '返回登录页面',
   },
 }

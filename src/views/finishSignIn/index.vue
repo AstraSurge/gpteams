@@ -1,5 +1,3 @@
-// a finish sign in page
-
 <script lang="ts" setup>
 import { isSignInWithEmailLink, signInWithEmailLink } from '@firebase/auth'
 import { NButton, NInput, NSpin, NText, useMessage } from 'naive-ui'
@@ -81,9 +79,17 @@ const appName = import.meta.env.VITE_APP_NAME
           >
             {{ t("auth.signIn") }}
           </NButton>
+          <NButton
+            size="large"
+            type="primary"
+            text
+            @click="router.replace('/')"
+          >
+            {{ t("auth.returnToSignInPage") }}
+          </NButton>
         </div>
       </div>
     </div>
-    <div class="hidden  md:block h-screen flex-1 bg-sign-in-background dark:bg-sign-in-background-dark" />
+    <div class="hidden  lg:block h-screen flex-1 bg-sign-in-background dark:bg-sign-in-background-dark" />
   </main>
 </template>
