@@ -107,5 +107,6 @@ export default {
     finishSignInRequiredEmailTips: '在其他浏览器打开链接？重新输入邮箱完成登录。',
     welcomeBack: '欢迎回来',
     returnToSignInPage: '返回登录页面',
+    waitSecondsToSendMail: '请等待 {seconds} 秒后再次发送邮件',
   },
 }

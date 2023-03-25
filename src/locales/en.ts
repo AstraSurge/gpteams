@@ -107,5 +107,6 @@ export default {
     finishSignInRequiredEmailTips: 'Opened link in another browser? Re-enter your email to complete sign-in.',
     welcomeBack: 'Welcome back',
     returnToSignInPage: 'Return to sign-in page',
+    waitSecondsToSendMail: 'Wait {seconds} seconds to send email',
   },
 }

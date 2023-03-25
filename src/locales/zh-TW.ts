@@ -107,5 +107,6 @@ export default {
     finishSignInRequiredEmailTips: '在其他瀏覽器開啟連結？重新輸入電郵完成登入。',
     welcomeBack: '歡迎回來',
     returnToSignInPage: '返回登入頁面',
+    waitSecondsToSendMail: '請等待 {seconds} 秒後再發送驗證信',
   },
 }

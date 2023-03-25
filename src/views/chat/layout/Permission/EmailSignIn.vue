@@ -1,8 +1,9 @@
 <script setup lang='ts'>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { NButton, NInput, useMessage } from 'naive-ui'
 import { useFirebaseAuth } from 'vuefire'
 import { sendSignInLinkToEmail } from '@firebase/auth'
+import { useLocalStorage } from '@vueuse/core'
 import { t } from '@/locales'
 import { validateEmail } from '@/utils/functions'
 import { FINISH_SIGN_IN_ROUTE } from '@/constants/routes'
@@ -13,6 +14,16 @@ const email = ref('')
 
 const submitLoading = ref(false)
 const submitDisabled = computed(() => !validateEmail(email.value) || submitLoading.value)
+
+const sendMailWaitSeconds = useLocalStorage('sendMailWaitSeconds', 0)
+
+async function startWaitToSendMail(time: number) {
+  sendMailWaitSeconds.value = time
+  while (sendMailWaitSeconds.value > 0) {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    sendMailWaitSeconds.value--
+  }
+}
 
 const auth = useFirebaseAuth()
 
@@ -35,6 +46,7 @@ async function SendLoginEmail() {
     await sendSignInLinkToEmail(auth, email.value, actionCodeSettings)
     window.localStorage.setItem('emailForSignIn', email.value)
     ms.success(t('auth.loginLinkSent'))
+    startWaitToSendMail(30)
   }
   catch (e) {
     ms.error(`${t('auth.pleaseTryAgainLater')}`)
@@ -50,6 +62,11 @@ function handlePress(event: KeyboardEvent) {
     SendLoginEmail()
   }
 }
+
+onMounted(() => {
+  if (sendMailWaitSeconds.value > 0)
+    startWaitToSendMail(sendMailWaitSeconds.value)
+})
 </script>
 
 <template>
@@ -58,11 +75,11 @@ function handlePress(event: KeyboardEvent) {
     <NButton
       type="primary"
       block
-      :disabled="submitDisabled"
+      :disabled="submitDisabled || sendMailWaitSeconds > 0"
       :loading="submitLoading"
       @click="SendLoginEmail"
     >
-      {{ t("auth.sendLoginLink") }}
+      {{ sendMailWaitSeconds > 0 ? t("auth.waitSecondsToSendMail", { seconds: sendMailWaitSeconds }) : t("auth.sendLoginLink") }}
     </NButton>
   </div>
 </template>
