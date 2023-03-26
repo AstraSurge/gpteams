@@ -3,6 +3,8 @@
 </div>
 </br>
 
+**NOTICE**: Version `1.0.0-beta` has been released. For details, see the [development board](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197)。We will be updating to the 1.0.0 official version soon, covering all 1.0.0 content in the Development Dashboard, and updating the highly detailed wiki as well。
+
 [Live demo](https://gpteams.astrasurge.com) (Only [Astra Surge](https://astrasurge.com) organization emails can log in.)
 
 # GPTeams
@@ -49,6 +51,8 @@ The following variables are optional:
 #### Backend Environment Variables
 
 The following variables must be set:
+
+- `ROOT_ACCOUNT`: System administrator account. If you log in via Google, enter the email address associated with your Google account here. Please note, if you log in with a phone number, you need to enter your **country calling code + phone number**, such as `+19312693452`.
 
 - `GOOGLE_APPLICATION_CREDENTIALS_JSON`: The private key file in JSON string format, required. Please refer to the [Firebase official documentation](https://firebase.google.com/docs/admin/setup?hl=en) for this information. Example:
 `
