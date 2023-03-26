@@ -15,7 +15,12 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "outDir": "build",
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "~/*": [
+        "src/*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

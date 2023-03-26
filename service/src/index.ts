@@ -2,8 +2,10 @@ import './utils/loadEnv'
 import express from 'express'
 import history from 'connect-history-api-fallback'
 import type { ChatContext, ChatMessage } from './chatgpt'
-import { chatConfig, chatReplyProcess } from './chatgpt'
-import { auth, hasAuth, verifyLogin } from './middleware/auth'
+import { chatReplyProcess } from './chatgpt'
+import { isAuthenticated, isRoot } from './middleware/auth'
+import admin, { adminConfigRef } from './firebaseAdmin'
+import addToBlacklist from './utils/addToBlacklist'
 
 const app = express()
 const router = express.Router()
@@ -21,12 +23,13 @@ app.all('*', (_, res, next) => {
   next()
 })
 
-router.post('/chat-process', auth, async (req, res) => {
+router.post('/chat-process', isAuthenticated, async (req, res) => {
   res.setHeader('Content-type', 'application/octet-stream')
 
   try {
     const { prompt, options = {} } = req.body as { prompt: string; options?: ChatContext }
     let firstChunk = true
+
     await chatReplyProcess(prompt, options, (chat: ChatMessage) => {
       res.write(firstChunk ? JSON.stringify(chat) : `\n${JSON.stringify(chat)}`)
       firstChunk = false
@@ -40,38 +43,77 @@ router.post('/chat-process', auth, async (req, res) => {
   }
 })
 
-router.post('/config', async (req, res) => {
+router.get('/config', async (req, res) => {
   try {
-    const response = await chatConfig()
-    res.send(response)
+    const configSnapshot = await adminConfigRef.get()
+    res.status(200).json(configSnapshot.data() ?? {})
   }
   catch (error) {
-    res.send(error)
+    res.status(500).send(error.message)
   }
 })
 
-router.post('/session', async (req, res) => {
+router.put('/config', async (req, res) => {
   try {
-    res.send({ status: 'Success', message: '', data: { auth: hasAuth() } })
+    const configData = req.body
+    await adminConfigRef.set(configData, { merge: true })
+    res.status(200).send('Admin config updated successfully')
   }
   catch (error) {
-    res.send({ status: 'Fail', message: error.message, data: null })
+    res.status(500).send(error.message)
   }
 })
 
-router.post('/verify', async (req, res) => {
+router.get('/users', isAuthenticated, isRoot, async (req, res) => {
   try {
-    const { token } = req.body as { token: string }
-    if (!token)
-      throw new Error('Secret key is empty')
+    const userList = []
+    let nextPageToken
 
-    if (!await verifyLogin(token))
-      throw new Error('密钥无效 | Secret key is invalid')
+    do {
+      const result = await admin.auth().listUsers(1000, nextPageToken)
+      result.users.forEach(user => userList.push(user.toJSON()))
+      nextPageToken = result.pageToken
+    } while (nextPageToken)
 
-    res.send({ status: 'Success', message: 'Verify successfully', data: null })
+    res.status(200).json(userList)
   }
   catch (error) {
-    res.send({ status: 'Fail', message: error.message, data: null })
+    res.status(500).send(error.message)
+  }
+})
+
+router.put('/users/:uid/disable', async (req, res) => {
+  try {
+    const uid = req.params.uid
+    await admin.auth().updateUser(uid, { disabled: true })
+    res.status(200).send('User disabled successfully')
+  }
+  catch (error) {
+    res.status(500).send(error.message)
+  }
+})
+
+router.put('/users/:uid/enable', async (req, res) => {
+  try {
+    const uid = req.params.uid
+    await admin.auth().updateUser(uid, { disabled: false })
+    res.status(200).send('User enabled successfully')
+  }
+  catch (error) {
+    res.status(500).send(error.message)
+  }
+})
+
+app.delete('/users/:uid', async (req, res) => {
+  try {
+    const uid = req.params.uid
+    const userInfo = await admin.auth().getUser(uid)
+    await addToBlacklist([userInfo.email, userInfo.phoneNumber])
+    await admin.auth().deleteUser(uid)
+    res.status(200).send('User deleted successfully')
+  }
+  catch (error) {
+    res.status(500).send(error.message)
   }
 })
 

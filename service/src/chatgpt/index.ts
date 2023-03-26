@@ -23,9 +23,6 @@ const timeoutMs: number = !isNaN(+process.env.TIMEOUT_MS) ? +process.env.TIMEOUT
 
 let apiModel: ApiModel
 
-if (!process.env.OPENAI_API_KEY && !process.env.OPENAI_ACCESS_TOKEN)
-  throw new Error('Missing OPENAI_API_KEY or OPENAI_ACCESS_TOKEN environment variable')
-
 let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
 (async () => {
