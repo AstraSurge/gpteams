@@ -1,5 +1,5 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
-import { post } from '@/utils/request'
+import { deleteFn, get, post, put } from '@/utils/request'
 
 export function fetchChatAPI<T = any>(
   prompt: string,
@@ -10,12 +10,6 @@ export function fetchChatAPI<T = any>(
     url: '/chat',
     data: { prompt, options },
     signal,
-  })
-}
-
-export function fetchChatConfig<T = any>() {
-  return post<T>({
-    url: '/config',
   })
 }
 
@@ -34,15 +28,79 @@ export function fetchChatAPIProcess<T = any>(
   })
 }
 
-export function fetchSession<T>() {
-  return post<T>({
-    url: '/session',
+export enum ProviderId {
+  Google = 'google.com',
+  Facebook = 'facebook.com',
+  Twitter = 'twitter.com',
+  Github = 'github.com',
+  Email = 'password',
+  Phone = 'phone',
+  Microsoft = 'microsoft.com',
+}
+
+export interface User {
+  uid: string
+  email?: string
+  emailVerified?: boolean
+  phoneNumber?: string
+  displayName: string
+  photoURL: string
+  disabled: boolean
+  metadata: {
+    creationTime: string
+    lastSignInTime: string
+    lastRefreshTime: string
+  }
+  providerData: [{
+    providerId: ProviderId
+    uid: string
+    phoneNumber?: string
+    email?: string
+    photoURL?: string
+    displayName?: string
+  }]
+
+}
+
+export function fetchUsers<T = User[]>() {
+  return get<T>({
+    url: '/users',
   })
 }
 
-export function fetchVerify<T>(token: string) {
-  return post<T>({
-    url: '/verify',
-    data: { token },
+export function disableUser<T = any>(uid: string) {
+  return put<T>({
+    url: `/users/${uid}/disable`,
+  })
+}
+
+export function enableUser<T = any>(uid: string) {
+  return put<T>({
+    url: `/users/${uid}/enable`,
+  })
+}
+
+export function deleteUser<T = any>(uid: string) {
+  return deleteFn<T>({
+    url: `/users/${uid}/delete`,
+  })
+}
+
+export interface SystemSettings {
+  blacklist?: string[]
+  whitelist?: string[]
+  openaiApiKeys?: string[]
+}
+
+export function fetchSystemSettings<T = SystemSettings>() {
+  return get<T>({
+    url: '/system-settings',
+  })
+}
+
+export function updateSystemSettings<T = SystemSettings>(data: T) {
+  return put<T>({
+    url: '/system-settings',
+    data,
   })
 }

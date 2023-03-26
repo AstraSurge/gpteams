@@ -1,45 +1,51 @@
-import admin from 'src/firebaseAdmin'
+import admin, { adminConfigRef } from '~/firebaseAdmin'
 
-export function hasAuth() {
-  // TODO: refactor hasAuth() related code，since we will integrate with firebase auth, and create a user management system
-  return true
+export async function verifyToken(credential: string) {
+  const decodedToken = await admin.auth().verifyIdToken(credential)
+  return decodedToken
 }
 
-export async function verifyLogin(credential: string) {
-  try {
-    if (process.env.AUTH_PHONE_REGEX) {
-      const decodedToken = await admin.auth().verifyIdToken(credential)
-      const regex = new RegExp(process.env.AUTH_PHONE_REGEX)
-      if (regex.test(decodedToken.phone_number))
-        return true
-    }
-
-    if (process.env.AUTH_EMAIL_REGEX) {
-      const decodedToken = await admin.auth().verifyIdToken(credential)
-      const regex = new RegExp(process.env.AUTH_EMAIL_REGEX)
-      if (regex.test(decodedToken.email))
-        return true
-    }
-  }
-  catch (e) {
-    console.error(e)
-    return false
-  }
-  return false
-}
-
-const auth = async (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
   try {
     const Authorization = (req.header('Authorization') || '').replace('Bearer ', '').trim()
+    const decodedToken = await verifyToken(Authorization)
 
-    if (await verifyLogin(Authorization))
+    // if user is root, skip the rest of the auth process
+    const rootAccount = process.env.ROOT_ACCOUNT.trim()
+    if ((decodedToken.email_verified && decodedToken.email === rootAccount) || decodedToken.phone_number === rootAccount) {
+      res.locals.isRoot = true
       return next()
+    }
 
-    throw new Error('Error: 无访问权限 | No access rights')
+    const adminConfig = await adminConfigRef.get()
+
+    const whitelist = adminConfig?.data()?.whitelist ?? []
+    const blacklist = adminConfig?.data()?.blacklist ?? []
+
+    const blacklistRegex = blacklist.map((item: string) => new RegExp(item))
+
+    if (blacklistRegex.some((item: RegExp) => item.test(decodedToken.email) || item.test(decodedToken.phone_number)))
+      throw new Error('Auth Error')
+
+    const whitelistRegex = whitelist.map((item: string) => new RegExp(item))
+
+    if (!whitelistRegex.some((item: RegExp) => item.test(decodedToken.email) || item.test(decodedToken.phone_number)))
+      throw new Error('Auth Error')
+
+    next()
   }
   catch (error) {
-    res.send({ status: 'Unauthorized', message: error.message ?? 'Please authenticate.', data: null })
+    console.error(error)
+    res.send({ status: 'Unauthorized', message: 'Auth Error', data: null })
   }
 }
 
-export { auth }
+const isRoot = async (req, res, next) => {
+  if (!res.locals.isRoot) {
+    res.send({ status: 'Unauthorized', message: 'Auth Error', data: null })
+    return
+  }
+  next()
+}
+
+export { isAuthenticated, isRoot }

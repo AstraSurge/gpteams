@@ -1,14 +1,15 @@
-<script setup lang='ts'>
-import { NButton, NCheckbox, NDivider, NModal, NSpace, NText, useMessage } from 'naive-ui'
+<script setup lang="ts">
+import { NButton, NCheckbox, NDivider } from 'naive-ui'
 import { useFirebaseAuth } from 'vuefire'
 import { ref, watch } from 'vue'
 import { browserLocalPersistence, browserSessionPersistence } from '@firebase/auth'
-import PhoneSignIn from './PhoneSignIn/index.vue'
-import GoogleSignInButton from './GoogleSignInButton.vue'
-import EmailSignIn from './EmailSignIn.vue'
-import { fetchVerify } from '@/api'
+import GoogleSignInButton from './components/GoogleSignInButton.vue'
+import EmailSignIn from './components/EmailSignIn.vue'
+import PhoneSignIn from './components/PhoneSignIn/index.vue'
+import AuthLayout from '@/components/custom/AuthLayout.vue'
 import { useAppStore, useAuthStore } from '@/store'
 import { t } from '@/locales'
+import { router } from '@/router'
 
 interface Props {
   visible: boolean
@@ -19,13 +20,9 @@ defineProps<Props>()
 const isUsingEmail = ref(false)
 const rememberMe = ref(false)
 
-const appName = import.meta.env.VITE_APP_NAME
-
 const { language } = useAppStore()
 
 const authStore = useAuthStore()
-
-const ms = useMessage()
 
 const auth = useFirebaseAuth()
 if (auth)
@@ -36,38 +33,33 @@ watch(() => rememberMe.value, (newRememberMe) => {
     auth.setPersistence(newRememberMe ? browserLocalPersistence : browserSessionPersistence)
 })
 
-async function verifyToken(token: string) {
-  try {
-    await fetchVerify(token)
-    authStore.setToken(token)
-    window.location.reload()
-  }
-  catch (error: any) {
-    ms.error(error.message ?? 'error')
-    authStore.removeToken()
-  }
+async function setToken(token: string) {
+  authStore.setToken(token)
+  router.replace('/')
 }
+
+const appName = import.meta.env.VITE_APP_NAME
 </script>
 
 <template>
-  <NModal :show="visible" class="w-11/12 max-w-xl">
-    <div class="px-4 py-12 bg-white rounded dark:bg-slate-800">
-      <header class="mb-8">
-        <p class="text-2xl md:text-3xl text-center font-extrabold text-slate-700 dark:text-slate-100">
-          {{ t('auth.signInTo') }}
-          <NText type="primary">
-            {{ appName }}
-          </NText>
-        </p>
+  <AuthLayout>
+    <div class="px-4 bg-white rounded dark:bg-slate-800 w-full max-w-lg">
+      <header class="mb-8 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-700 dark:text-slate-100">
+          {{ t('auth.welcomeBack') }}
+        </h1>
       </header>
-      <NSpace vertical size="large" class="m-auto max-w-md">
-        <GoogleSignInButton :on-success="verifyToken" />
+      <div class="flex flex-col gap-4">
+        <p class="text-slate-500 dark:text-slate-200 font-light text-xl text-center">
+          {{ t("auth.signInTips", { appName }) }}
+        </p>
+        <GoogleSignInButton :on-success="setToken" />
         <NDivider class="my-2">
           <span class="text-slate-600 dark:text-slate-200 font-semibold">
             {{ t("auth.or") }}
           </span>
         </NDivider>
-        <PhoneSignIn v-if="!isUsingEmail" :on-success="verifyToken" />
+        <PhoneSignIn v-if="!isUsingEmail" :on-success="setToken" />
         <EmailSignIn v-else />
         <div class="w-full flex justify-between">
           <NCheckbox :checked="rememberMe" @update:checked="rememberMe = $event">
@@ -77,7 +69,7 @@ async function verifyToken(token: string) {
             {{ isUsingEmail ? t('auth.signInWithPhone') : t('auth.signInWithEmail') }}
           </NButton>
         </div>
-      </NSpace>
+      </div>
     </div>
-  </NModal>
+  </AuthLayout>
 </template>

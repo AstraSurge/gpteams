@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupPageGuard } from './permission'
 import { ChatLayout } from '@/views/chat/layout'
+import AdminLayout from '@/views/admin/layout/index.vue'
 import { FINISH_SIGN_IN_ROUTE } from '@/constants/routes'
 
 const routes: RouteRecordRaw[] = [
@@ -11,6 +12,9 @@ const routes: RouteRecordRaw[] = [
     name: 'Root',
     component: ChatLayout,
     redirect: '/chat',
+    meta: {
+      requiresAuth: true,
+    },
     children: [
       {
         path: '/chat/:uuid?',
@@ -20,9 +24,35 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/sign-in',
+    name: 'SignIn',
+    component: () => import('@/views/signIn/index.vue'),
+  },
+  {
     path: FINISH_SIGN_IN_ROUTE,
     name: 'FinishSignIn',
     component: () => import('@/views/finishSignIn/index.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: AdminLayout,
+    redirect: '/admin/user-management',
+    meta: {
+      isAdmin: true,
+    },
+    children: [
+      {
+        path: '/admin/user-management',
+        name: 'UserManagement',
+        component: () => import('@/views/admin/userManagement/index.vue'),
+      },
+      {
+        path: '/admin/system-settings',
+        name: 'SystemSettings',
+        component: () => import('@/views/admin/systemSettings/index.vue'),
+      },
+    ],
   },
   {
     path: '/404',
