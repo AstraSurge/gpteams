@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import type { User } from '@/api'
-import { deleteUser, disableUser, enableUser, fetchUsers } from '@/api'
+import type { SystemSettings, User } from '@/api'
+import { deleteUser, disableUser, enableUser, fetchSystemSettings, fetchUsers, updateSystemSettings } from '@/api'
 
 export const useAdminStore = defineStore('admin-store', {
   state: (): {
@@ -9,7 +9,7 @@ export const useAdminStore = defineStore('admin-store', {
       loading: boolean
     }
     systemSettings: {
-      data: Record<string, unknown>
+      data: SystemSettings
       loading: boolean
     }
   } => ({
@@ -71,9 +71,40 @@ export const useAdminStore = defineStore('admin-store', {
       }
       catch (e) {
         console.error(e)
+        throw e
       }
       finally {
         this.users.loading = false
+      }
+    },
+
+    async loadSystemSettings() {
+      try {
+        this.systemSettings.loading = true
+        const { data } = await fetchSystemSettings()
+        this.systemSettings.data = data
+      }
+      catch (e) {
+        console.error(e)
+        throw e
+      }
+      finally {
+        this.systemSettings.loading = false
+      }
+    },
+
+    async updateSystemSettings(data: SystemSettings) {
+      try {
+        this.systemSettings.loading = true
+        await updateSystemSettings(data)
+        this.loadSystemSettings()
+      }
+      catch (e) {
+        console.error(e)
+        throw e
+      }
+      finally {
+        this.systemSettings.loading = false
       }
     },
 

@@ -85,3 +85,22 @@ export function deleteUser<T = any>(uid: string) {
     url: `/users/${uid}/delete`,
   })
 }
+
+export interface SystemSettings {
+  blacklist?: string[]
+  whitelist?: string[]
+  openaiApiKeys?: string[]
+}
+
+export function fetchSystemSettings<T = SystemSettings>() {
+  return get<T>({
+    url: '/system-settings',
+  })
+}
+
+export function updateSystemSettings<T = SystemSettings>(data: T) {
+  return put<T>({
+    url: '/system-settings',
+    data,
+  })
+}

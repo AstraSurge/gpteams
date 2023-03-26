@@ -137,5 +137,13 @@ export default {
     phone: '手機號碼',
     githubcom: 'Github',
     microsoftcom: 'Microsoft',
+    configureBlacklist: '設定黑名單',
+    configureBlacklistTips: '黑名單中的用戶將無法登入，一行一個 Email，支援正規表達式。',
+    configureWhitelist: '設定白名單',
+    configureWhitelistTips: '白名單之外的用戶將無法登入，一行一個 Email，支援正規表達式。',
+    configureOpenaiApiKey: '設定 OpenAI API Key',
+    configureOpenaiApiKeyTips: '您的 OpenAI Key 將會被安全存儲，提交後不會再返回至客戶端。在這裡獲取您的 OpenAI API Key：https://beta.openai.com/account/api-keys',
+    update: '更新',
+    tagsInputPlaceholder: '輸入並按回車鍵添加',
   },
 }

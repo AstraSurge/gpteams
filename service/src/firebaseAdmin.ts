@@ -21,6 +21,7 @@ adminConfigRef.get().then((doc) => {
     adminConfigRef.set({
       whitelist: [],
       blacklist: [],
+      openaiApiKeys: [],
     })
   }
 })

@@ -137,6 +137,13 @@ export default {
     phone: 'Phone',
     githubcom: 'Github',
     microsoftcom: 'Microsoft',
-
+    configureBlacklist: 'Configure Blacklist',
+    configureBlacklistTips: 'Users in the blacklist will not be able to log in. One email per line, support regular expression.',
+    configureWhitelist: 'Configure Whitelist',
+    configureWhitelistTips: 'Users not in the whitelist will not be able to log in. One email per line, support regular expression.',
+    configureOpenaiApiKey: 'Configure OpenAI API Key',
+    configureOpenaiApiKeyTips: 'Your OpenAI Key will be securely stored and won\'t be returned to the client side after submission. Get your key from https://platform.openai.com/account/api-keys',
+    update: 'Update',
+    tagsInputPlaceholder: 'Enter and press Return to add',
   },
 }

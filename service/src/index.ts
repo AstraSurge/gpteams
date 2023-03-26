@@ -2,7 +2,7 @@ import './utils/loadEnv'
 import express from 'express'
 import history from 'connect-history-api-fallback'
 import type { ChatContext, ChatMessage } from './chatgpt'
-import { chatReplyProcess } from './chatgpt'
+import { chatReplyProcess, updateApiKey } from './chatgpt'
 import { isAuthenticated, isRoot } from './middleware/auth'
 import admin, { adminConfigRef } from './firebaseAdmin'
 import addToBlacklist from './utils/addToBlacklist'
@@ -43,12 +43,15 @@ router.post('/chat-process', isAuthenticated, async (req, res) => {
   }
 })
 
-router.get('/config', async (req, res) => {
+router.get('/system-settings', async (req, res) => {
   try {
     const configSnapshot = await adminConfigRef.get()
+    const configData = configSnapshot.data()
+    // remove openaiApiKeys from response for security reason
+    const { openaiApiKeys: _, ...rest } = configData ?? {}
     res.status(200).json({
       status: 'Success',
-      data: configSnapshot.data(),
+      data: rest,
     } ?? {})
   }
   catch (error) {
@@ -56,9 +59,15 @@ router.get('/config', async (req, res) => {
   }
 })
 
-router.put('/config', async (req, res) => {
+router.put('/system-settings', async (req, res) => {
   try {
     const configData = req.body
+
+    if (configData?.openaiApiKeys?.length > 0) {
+      const apiKey = configData.openaiApiKeys[0]
+      await updateApiKey(apiKey)
+    }
+
     await adminConfigRef.set(configData, { merge: true })
     res.status(200).send({
       message: 'Config updated successfully',
