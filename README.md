@@ -3,6 +3,8 @@
 </div>
 </br>
 
+**通知**：已发布 `1.0.0-beta` 版本，详见 [1.0.0-beta 更新日志](https://github.com/AstraSurge/gpteams/releases/tag/v1.0.0-beta)。我们将在近期更新 1.0.0 正式版本，涵盖 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 所有 1.0.0 内容，并更新超详细的 wiki。
+
 [在线演示网站](https://gpteams.astrasurge.com) (只有 [Astra Surge](https://astrasurge.com) 成员的组织邮箱才能登录)
 
 # GPTeams
@@ -49,6 +51,8 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 #### 后端环境变量
 
 以下变量是必需设置的：
+
+- `ROOT_ACCOUNT`: 系统管理员账号，如果你通过 google 登录，那这里填 google 账号对应的邮箱。注意，如果你通过电话号码登录，这里需要填写你的**国家呼叫代码+电话号码**，如 `+8613498888888`。
 
 - `GOOGLE_APPLICATION_CREDENTIALS_JSON`：JSON 字符串格式的私钥文件, 必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
 `
