@@ -25,6 +25,7 @@ export default {
     success: 'Success',
     failed: 'Failed',
     verify: 'Verify',
+    goToHomepage: 'Go to Homepage',
   },
   chat: {
     placeholder: 'Ask me anything...(Shift + Enter = line break)',

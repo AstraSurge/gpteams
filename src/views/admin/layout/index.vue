@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { NLayout, NLayoutContent, NLayoutSider, NMenu, NText } from 'naive-ui'
+import { NButton, NLayout, NLayoutContent, NLayoutSider, NMenu, NText } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import { h, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -51,6 +51,15 @@ const appName = import.meta.env.VITE_APP_NAME as string
         :value="router.currentRoute.value.path"
         :on-update-value="value => router.push(value)"
       />
+      <NButton
+        block
+        type="primary"
+        class="absolute bottom-8 left-4 right-4"
+        text
+        @click="() => router.push('/')"
+      >
+        {{ t("common.goToHomepage") }}
+      </NButton>
     </NLayoutSider>
     <NLayoutContent content-style="padding: 24px;" :native-scrollbar="false">
       <RouterView v-slot="{ Component, route }">

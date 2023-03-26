@@ -25,6 +25,7 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
+    goToHomepage: '返回首页',
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
