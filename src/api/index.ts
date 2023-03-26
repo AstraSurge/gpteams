@@ -13,12 +13,6 @@ export function fetchChatAPI<T = any>(
   })
 }
 
-export function fetchChatConfig<T = any>() {
-  return post<T>({
-    url: '/config',
-  })
-}
-
 export function fetchChatAPIProcess<T = any>(
   params: {
     prompt: string
@@ -31,18 +25,5 @@ export function fetchChatAPIProcess<T = any>(
     data: { prompt: params.prompt, options: params.options },
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,
-  })
-}
-
-export function fetchSession<T>() {
-  return post<T>({
-    url: '/session',
-  })
-}
-
-export function fetchVerify<T>(token: string) {
-  return post<T>({
-    url: '/verify',
-    data: { token },
   })
 }

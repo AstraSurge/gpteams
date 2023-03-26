@@ -1,6 +1,7 @@
 import type { AxiosProgressEvent, AxiosResponse, GenericAbortSignal } from 'axios'
 import request from './axios'
 import { useAuthStore } from '@/store'
+import { router } from '@/router'
 
 export interface HttpOption {
   url: string
@@ -30,7 +31,7 @@ function http<T = any>(
 
     if (res.data.status === 'Unauthorized') {
       authStore.removeToken()
-      window.location.reload()
+      router.push('/sign-in')
     }
 
     return Promise.reject(res.data)

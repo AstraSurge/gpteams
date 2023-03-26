@@ -3,7 +3,6 @@ import { isSignInWithEmailLink, signInWithEmailLink } from '@firebase/auth'
 import { NButton, NInput, NSpin, useMessage } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import { useFirebaseAuth } from 'vuefire'
-import { fetchVerify } from '@/api'
 import { useAuthStore } from '@/store'
 import { t } from '@/locales'
 import { router } from '@/router'
@@ -38,7 +37,6 @@ async function handleLogin() {
   const token = await result.user.getIdToken()
 
   try {
-    await fetchVerify(token)
     authStore.setToken(token)
   }
   catch {
