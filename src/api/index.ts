@@ -1,5 +1,5 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
-import { post } from '@/utils/request'
+import { deleteFn, get, post, put } from '@/utils/request'
 
 export function fetchChatAPI<T = any>(
   prompt: string,
@@ -25,5 +25,63 @@ export function fetchChatAPIProcess<T = any>(
     data: { prompt: params.prompt, options: params.options },
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,
+  })
+}
+
+export enum ProviderId {
+  Google = 'google.com',
+  Facebook = 'facebook.com',
+  Twitter = 'twitter.com',
+  Github = 'github.com',
+  Email = 'password',
+  Phone = 'phone',
+  Microsoft = 'microsoft.com',
+}
+
+export interface User {
+  uid: string
+  email?: string
+  emailVerified?: boolean
+  phoneNumber?: string
+  displayName: string
+  photoURL: string
+  disabled: boolean
+  metadata: {
+    creationTime: string
+    lastSignInTime: string
+    lastRefreshTime: string
+  }
+  providerData: [{
+    providerId: ProviderId
+    uid: string
+    phoneNumber?: string
+    email?: string
+    photoURL?: string
+    displayName?: string
+  }]
+
+}
+
+export function fetchUsers<T = User[]>() {
+  return get<T>({
+    url: '/users',
+  })
+}
+
+export function disableUser<T = any>(uid: string) {
+  return put<T>({
+    url: `/users/${uid}/disable`,
+  })
+}
+
+export function enableUser<T = any>(uid: string) {
+  return put<T>({
+    url: `/users/${uid}/enable`,
+  })
+}
+
+export function deleteUser<T = any>(uid: string) {
+  return deleteFn<T>({
+    url: `/users/${uid}/delete`,
   })
 }

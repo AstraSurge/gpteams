@@ -54,7 +54,7 @@ onMounted(handleLogin)
 <template>
   <AuthLayout>
     <div class="flex flex-col justify-center items-center gap-6 text-center w-full max-w-lg">
-      <h1 class="text-4xl md:text-5xl font-bold text-slate-700 dark:text-slate-100">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-600 dark:text-slate-100">
         {{ t("auth.welcomeBack") }}
       </h1>
       <NSpin v-if="isLogin" :size="120" class="p-8" />

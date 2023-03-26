@@ -46,7 +46,10 @@ router.post('/chat-process', isAuthenticated, async (req, res) => {
 router.get('/config', async (req, res) => {
   try {
     const configSnapshot = await adminConfigRef.get()
-    res.status(200).json(configSnapshot.data() ?? {})
+    res.status(200).json({
+      status: 'Success',
+      data: configSnapshot.data(),
+    } ?? {})
   }
   catch (error) {
     res.status(500).send(error.message)
@@ -57,7 +60,10 @@ router.put('/config', async (req, res) => {
   try {
     const configData = req.body
     await adminConfigRef.set(configData, { merge: true })
-    res.status(200).send('Admin config updated successfully')
+    res.status(200).send({
+      message: 'Config updated successfully',
+      status: 'Success',
+    })
   }
   catch (error) {
     res.status(500).send(error.message)
@@ -75,7 +81,10 @@ router.get('/users', isAuthenticated, isRoot, async (req, res) => {
       nextPageToken = result.pageToken
     } while (nextPageToken)
 
-    res.status(200).json(userList)
+    res.status(200).json({
+      data: userList,
+      status: 'Success',
+    })
   }
   catch (error) {
     res.status(500).send(error.message)
@@ -86,7 +95,10 @@ router.put('/users/:uid/disable', async (req, res) => {
   try {
     const uid = req.params.uid
     await admin.auth().updateUser(uid, { disabled: true })
-    res.status(200).send('User disabled successfully')
+    res.status(200).send({
+      message: 'User disabled successfully',
+      status: 'Success',
+    })
   }
   catch (error) {
     res.status(500).send(error.message)
@@ -97,7 +109,10 @@ router.put('/users/:uid/enable', async (req, res) => {
   try {
     const uid = req.params.uid
     await admin.auth().updateUser(uid, { disabled: false })
-    res.status(200).send('User enabled successfully')
+    res.status(200).send({
+      message: 'User enabled successfully',
+      status: 'Success',
+    })
   }
   catch (error) {
     res.status(500).send(error.message)
@@ -110,7 +125,10 @@ app.delete('/users/:uid', async (req, res) => {
     const userInfo = await admin.auth().getUser(uid)
     await addToBlacklist([userInfo.email, userInfo.phoneNumber])
     await admin.auth().deleteUser(uid)
-    res.status(200).send('User deleted successfully')
+    res.status(200).send({
+      message: 'User deleted successfully',
+      status: 'Success',
+    })
   }
   catch (error) {
     res.status(500).send(error.message)
