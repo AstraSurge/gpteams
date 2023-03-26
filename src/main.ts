@@ -15,8 +15,6 @@ async function bootstrap() {
 
   setupI18n(app)
 
-  await setupRouter(app)
-
   app.use(VueFire, {
     firebaseApp,
     modules: [
@@ -24,6 +22,8 @@ async function bootstrap() {
       VueFireAuth(),
     ],
   })
+
+  await setupRouter(app)
 
   app.mount('#app')
 }

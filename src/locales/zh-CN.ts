@@ -108,5 +108,6 @@ export default {
     welcomeBack: '欢迎回来',
     returnToSignInPage: '返回登录页面',
     waitSecondsToSendMail: '请等待 {seconds} 秒后再次发送邮件',
+    signInTips: '欢迎来到 {appName}，请登录以继续，若无账号将自动为您注册。',
   },
 }

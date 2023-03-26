@@ -11,6 +11,9 @@ const routes: RouteRecordRaw[] = [
     name: 'Root',
     component: ChatLayout,
     redirect: '/chat',
+    meta: {
+      requiresAuth: true,
+    },
     children: [
       {
         path: '/chat/:uuid?',
@@ -18,6 +21,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/chat/index.vue'),
       },
     ],
+  },
+  {
+    path: '/sign-in',
+    name: 'SignIn',
+    component: () => import('@/views/signIn/index.vue'),
   },
   {
     path: FINISH_SIGN_IN_ROUTE,

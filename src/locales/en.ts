@@ -108,5 +108,6 @@ export default {
     welcomeBack: 'Welcome back',
     returnToSignInPage: 'Return to sign-in page',
     waitSecondsToSendMail: 'Wait {seconds} seconds to send email',
+    signInTips: 'Welcome to {appName}. Sign in to continue, or a new account will be created automatically.',
   },
 }

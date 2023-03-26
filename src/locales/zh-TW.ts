@@ -108,5 +108,6 @@ export default {
     welcomeBack: '歡迎回來',
     returnToSignInPage: '返回登入頁面',
     waitSecondsToSendMail: '請等待 {seconds} 秒後再發送驗證信',
+    signInTips: '歡迎來到 {appName}，請登入以繼續，若無帳號將自動為您註冊。',
   },
 }
