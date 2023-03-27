@@ -19,7 +19,7 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 
 ## 特点
 
-1. 提供完全免费的部署方案，利用 Firebase 和 Vercel 服务进行部署，免费额度足以满足小型团队需求（待实现，已排期）。
+1. 提供完全免费的部署方案，利用 Firebase ~~和 Vercel 服务进行部署~~(经过实践，GPTeams无法支持Vercel的免费版，因为Vercel的免费版对 Serverless 函数的个数限制太低，而 GPTeams 计划日后添加更多好用的服务，Vercel的免费版不是长久之计，我们正在寻找另外一个可以轻松且免费部署 GPTeams 的平台)，免费额度足以满足小型团队需求（待实现，已排期）。
 2. 支持通过 Google 账户登录、电话号码登录以及电子邮箱登录。
 3. 设有管理员界面以便于管理用户，包括禁用/启用用户，删除用户等功能。
 4. 系统设置页面，可以设置系统黑名单，白名单，OpenAI API Key，流量限制规则。（流量限制规则的配置待实现，已排期）。
@@ -67,9 +67,6 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 1. 将上文获取的**前端环境变量**填入 `.env` 中。
 2. 构建 Docker 镜像：`sudo docker build -t gpteams .`
 3. 运行 GPTeams 容器，注意将其中的变量替换为上文说明的后端环境变量：`sudo docker run --name gpteams -d -p 8000:3002 GOOGLE_APPLICATION_CREDENTIALS_JSON='XXXX' gpteams`
-
-
-PS: 如果你认为上述操作过于复杂，请耐心等待下一个版本的发布。在下一版本中，我们将添加一键部署到 Vercel 的功能，让部署变得更加简单和方便。
 
 ## 鸣谢
 

@@ -19,7 +19,7 @@ GPTeams is a third-party client based on OpenAI API, customized for ChatGPT, pro
 
 ## Features
 
-1. Provides a completely free deployment solution using Firebase and Vercel services. The free quota is enough to meet the needs of small teams (to be implemented, already scheduled).
+1. Provides a completely free deployment solution using Firebase ~~and Vercel services~~(GPTeams cannot support Vercel's Hobby Plan because the limits of Vercel's Hobby Plan make it impossible to deploy GPTeams, we are currently looking for another platform that allows easy and free deployment of GPTeams.). The free quota is enough to meet the needs of small teams (to be implemented, already scheduled).
 2. Supports login through Google account, phone number, and email.
 3. Equipped with an admin interface for user management, including disabling users, delete users etc.
 4. System settings page, admin can set blacklist, whitelist, OpenAI API key, user traffic rules (user traffic rules setting to be implemented, already scheduled)
@@ -67,8 +67,6 @@ For other variables, please refer to the README of the original [chatgpt-web](ht
 1. Fill in the **frontend environment variables** obtained above into `.env`.
 2. Build the Docker image: `sudo docker build -t gpteams .`
 3. Run the GPTeams container, replacing the variables with the backend environment variables described above: `sudo docker run --name gpteams -d -p 8000:3002 GOOGLE_APPLICATION_CREDENTIALS_JSON='XXXX' gpteams`
-
-PS: If you find the above steps too complicated, please wait patiently for the next minor version release. In the next version, we will add a one-click deployment to Vercel function to make deployment even simpler and more convenient.
 
 ## Acknowledgments
 
