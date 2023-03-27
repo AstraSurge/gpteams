@@ -20,9 +20,11 @@ export function fetchChatAPIProcess<T = any>(
     signal?: GenericAbortSignal
     onDownloadProgress?: (progressEvent: AxiosProgressEvent) => void },
 ) {
+  const settingStore = useSettingStore()
+
   return post<T>({
     url: '/chat-process',
-    data: { prompt: params.prompt, options: params.options },
+    data: { prompt: params.prompt, options: params.options, systemMessage: settingStore.systemMessage },
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,
   })

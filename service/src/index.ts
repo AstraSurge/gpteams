@@ -27,7 +27,7 @@ router.post('/chat-process', isAuthenticated, async (req, res) => {
   res.setHeader('Content-type', 'application/octet-stream')
 
   try {
-    const { prompt, options = {} } = req.body as { prompt: string; options?: ChatContext }
+    const { prompt, options = {}, systemMessage } = req.body as RequestProps
     let firstChunk = true
 
     await chatReplyProcess(prompt, options, (chat: ChatMessage) => {
@@ -146,5 +146,6 @@ app.delete('/users/:uid', async (req, res) => {
 
 app.use('', router)
 app.use('/api', router)
+app.set('trust proxy', 1)
 
 app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
