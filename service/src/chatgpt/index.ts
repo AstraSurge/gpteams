@@ -3,7 +3,7 @@ import 'isomorphic-fetch'
 import type { ChatGPTAPIOptions, ChatMessage, SendMessageOptions } from 'chatgpt'
 import { ChatGPTAPI } from 'chatgpt'
 import { SocksProxyAgent } from 'socks-proxy-agent'
-import { HttpsProxyAgent } from 'https-proxy-agent'
+import httpsProxyAgent from 'https-proxy-agent'
 import fetch from 'node-fetch'
 import { sendResponse } from '../utils'
 import type { ChatContext, ModelConfig } from '../types'
@@ -17,6 +17,8 @@ const ErrorCodeMessage: Record<string, string> = {
   504: '[OpenAI] 网关超时 | Gateway Time-out',
   500: '[OpenAI] 服务器繁忙，请稍后再试 | Internal Server Error',
 }
+
+const { HttpsProxyAgent } = httpsProxyAgent
 
 dotenv.config()
 

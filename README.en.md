@@ -66,7 +66,7 @@ For other variables, please refer to the README of the original [chatgpt-web](ht
 
 1. Fill in the **frontend environment variables** obtained above into `.env`.
 2. Build the Docker image: `sudo docker build -t gpteams .`
-3. Run the GPTeams container, replacing the variables with the backend environment variables described above: `sudo docker run --name gpteams -d -p 8000:3002 --env OPENAI_API_KEY='XXXXX' GOOGLE_APPLICATION_CREDENTIALS_JSON='XXXX' --env AUTH_EMAIL_REGEX='XXX.XXX' --env AUTH_PHONE_REGEX='XXXX' gpteams`
+3. Run the GPTeams container, replacing the variables with the backend environment variables described above: `sudo docker run --name gpteams -d -p 8000:3002 GOOGLE_APPLICATION_CREDENTIALS_JSON='XXXX' gpteams`
 
 PS: If you find the above steps too complicated, please wait patiently for the next minor version release. In the next version, we will add a one-click deployment to Vercel function to make deployment even simpler and more convenient.
 

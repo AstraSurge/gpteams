@@ -1,4 +1,4 @@
-import * as admin from 'firebase-admin'
+import admin from 'firebase-admin'
 import { getFirestore } from 'firebase-admin/firestore'
 
 const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON)

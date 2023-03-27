@@ -39,6 +39,7 @@ const routes: RouteRecordRaw[] = [
     component: AdminLayout,
     redirect: '/admin/user-management',
     meta: {
+      requiresAuth: true,
       isAdmin: true,
     },
     children: [

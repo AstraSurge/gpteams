@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { getToken, removeToken, setToken } from './helper'
 import { store } from '@/store'
-
 export interface AuthState {
   token: string | undefined
 }
