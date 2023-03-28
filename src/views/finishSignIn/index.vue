@@ -34,18 +34,24 @@ async function handleLogin() {
 
   isLogin.value = true
 
-  const result = await signInWithEmailLink(auth, email.value, window.location.href)
-
-  const token = await result.user.getIdToken()
+  let token = ''
+  try {
+    const result = await signInWithEmailLink(auth, email.value, window.location.href)
+    token = await result.user.getIdToken()
+  }
+  catch {
+    return ms.error(t('auth.invalidEmailLinkOrExpired'))
+  }
 
   try {
     const resp = await verifyIdToken(token)
-    if (resp.status !== 'Success')
-      ms.error(t('auth.noPermissionToSignIn'))
     authStore.setAuthState(resp.data)
   }
   catch {
-    ms.error(t('auth.invalidEmailLinkOrExpired'))
+    ms.error(t('auth.noPermissionToSignIn'), {
+      duration: 5000,
+      closable: true,
+    })
   }
   finally {
     window.localStorage.removeItem(SEND_MAIL_WAIT_SECONDS)
