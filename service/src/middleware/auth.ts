@@ -22,12 +22,12 @@ export async function isAuthenticated(decodedToken: DecodedIdToken) {
   const blacklistRegex = blacklist.map((item: string) => generateRegExp(item))
 
   if (blacklistRegex.some((item: RegExp) => item.test(decodedToken.email) || item.test(decodedToken.phone_number)))
-    throw new Error('Auth Error')
+    return false
 
   const whitelistRegex = whitelist.map((item: string) => generateRegExp(item))
 
   if (!whitelistRegex.some((item: RegExp) => item.test(decodedToken.email) || item.test(decodedToken.phone_number)))
-    throw new Error('Auth Error')
+    return false
 
   return true
 }
