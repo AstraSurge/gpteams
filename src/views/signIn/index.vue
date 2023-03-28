@@ -37,14 +37,20 @@ watch(() => rememberMe.value, (newRememberMe) => {
 })
 
 async function setToken(token: string) {
-  const resp = await verifyIdToken(token)
-  if (resp.status !== 'Success')
-    ms.error(t('auth.noPermissionToSignIn'))
-  authStore.setAuthState({
-    ...resp.data,
-    token,
-  })
-  router.replace('/')
+  try {
+    const resp = await verifyIdToken(token)
+    authStore.setAuthState({
+      ...resp.data,
+      token,
+    })
+    router.replace('/')
+  }
+  catch {
+    ms.error(t('auth.noPermissionToSignIn'), {
+      duration: 5000,
+      closable: true,
+    })
+  }
 }
 
 const appName = import.meta.env.VITE_APP_NAME
