@@ -69,6 +69,7 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余额',
+    canNotBeEmpty: '不能为空',
   },
   store: {
     siderButton: '提示词商店',
@@ -117,6 +118,9 @@ export default {
     returnToSignInPage: '返回登录页面',
     waitSecondsToSendMail: '请等待 {seconds} 秒后再次发送邮件',
     signInTips: '欢迎来到 {appName}，请登录以继续，若无账号将自动为您注册。',
+    noPermissionToSignIn: '您没有权限访问此账户。如果您认为这是一个错误，请联系管理员。',
+    error401Title: '未授权访问',
+    error401Content: '您没有权限访问此页面。请检查您的登录凭据，如果您认为这是一个错误，请联系管理员。',
   },
   admin: {
     userManagement: '用户管理',

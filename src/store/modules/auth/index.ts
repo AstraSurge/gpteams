@@ -1,26 +1,49 @@
 import { defineStore } from 'pinia'
-import { getToken, removeToken, setToken } from './helper'
+import { getCurrentUser } from 'vuefire'
 import { store } from '@/store'
+import { verifyIdToken } from '@/api'
 export interface AuthState {
-  token: string | undefined
+  token?: string
+  role?: string
 }
 
 export const useAuthStore = defineStore('auth-store', {
   state: (): AuthState => ({
-    token: getToken(),
+    token: undefined,
+    role: undefined,
   }),
 
   actions: {
-
     setToken(token: string) {
       this.token = token
-      setToken(token)
+    },
+
+    async initializeAuthState() {
+      try {
+        const user = await getCurrentUser()
+        if (!user)
+          throw Error
+        const token = await user.getIdToken()
+        const resp = await verifyIdToken(token)
+        this.token = token
+        this.role = resp.data.role
+      }
+      catch {
+        this.token = undefined
+        this.role = undefined
+      }
     },
 
     removeToken() {
       this.token = undefined
-      removeToken()
+      this.role = undefined
     },
+
+    setAuthState({ token, role }: AuthState) {
+      this.token = token
+      this.role = role
+    },
+
   },
 })
 

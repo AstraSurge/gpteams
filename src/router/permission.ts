@@ -1,22 +1,18 @@
 import type { Router } from 'vue-router'
-import { getCurrentUser } from 'vuefire'
 import { useAuthStoreWithout } from '@/store'
 
 export function setupPageGuard(router: Router) {
   router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStoreWithout()
-    if (!to.meta.requiresAuth)
+    if (!to.meta.requiresAuth && !to.meta.requiresAdmin)
       return next()
     try {
-      const currentUser = await getCurrentUser()
-      if (!currentUser) {
-        authStore.removeToken()
+      const token = authStore.token
+      if (!token)
         return next({ name: 'SignIn' })
-      }
-      if (!authStore.token) {
-        const token = await currentUser.getIdToken()
-        authStore.setToken(token)
-      }
+
+      if (to.meta.requiresAdmin && authStore.role !== 'admin')
+        return next({ name: '403' })
       next()
     }
     catch (error) {

@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { NButton } from 'naive-ui'
 import { useRouter } from 'vue-router'
+import { t } from '@/locales'
+import Icon403 from '@/icons/403.vue'
 
 const router = useRouter()
 
@@ -12,19 +14,19 @@ function goHome() {
 <template>
   <div class="flex h-full">
     <div class="px-4 m-auto space-y-4 text-center max-[400px]">
-      <h1 class="text-4xl text-slate-800 font-extrabold dark:text-neutral-200">
-        Sorry, page not found!
+      <h1 class="text-4xl font-extrabold text-slate-800 dark:text-neutral-200">
+        {{ t("auth.error401Title") }}
       </h1>
       <p class="text-base text-slate-500 dark:text-neutral-400">
-        Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve mistyped the URL? Be sure to check your spelling.
+        {{ t("auth.error401Content") }}
       </p>
       <div class="flex items-center justify-center text-center">
         <div class="w-[300px]">
-          <img src="../../../icons/404.svg" alt="404">
+          <Icon403 />
         </div>
       </div>
       <NButton type="primary" @click="goHome">
-        Go to Home
+        {{ t("common.goToHomepage") }}
       </NButton>
     </div>
   </div>

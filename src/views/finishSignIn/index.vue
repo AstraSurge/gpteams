@@ -8,11 +8,13 @@ import { t } from '@/locales'
 import { router } from '@/router'
 import { validateEmail } from '@/utils/functions'
 import AuthLayout from '@/components/custom/AuthLayout.vue'
+import { verifyIdToken } from '@/api'
+import { EMAIL_FOR_SIGN_IN, SEND_MAIL_WAIT_SECONDS } from '@/constants/storage'
 
 const ms = useMessage()
 
 const authStore = useAuthStore()
-const email = ref(localStorage.getItem('emailForSignIn') || '')
+const email = ref(localStorage.getItem(EMAIL_FOR_SIGN_IN) || '')
 
 const submitDisabled = computed(() => !validateEmail(email.value))
 
@@ -37,13 +39,17 @@ async function handleLogin() {
   const token = await result.user.getIdToken()
 
   try {
-    authStore.setToken(token)
+    const resp = await verifyIdToken(token)
+    if (resp.status !== 'Success')
+      ms.error(t('auth.noPermissionToSignIn'))
+    authStore.setAuthState(resp.data)
   }
   catch {
     ms.error(t('auth.invalidEmailLinkOrExpired'))
   }
   finally {
-    window.localStorage.removeItem('emailForSignIn')
+    window.localStorage.removeItem(SEND_MAIL_WAIT_SECONDS)
+    window.localStorage.removeItem(EMAIL_FOR_SIGN_IN)
     router.replace('/')
   }
 }

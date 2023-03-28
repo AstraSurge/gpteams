@@ -69,6 +69,7 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余額',
+    canNotBeEmpty: '不可為空',
   },
   store: {
     siderButton: '提示詞商店',
@@ -117,6 +118,9 @@ export default {
     returnToSignInPage: '返回登入頁面',
     waitSecondsToSendMail: '請等待 {seconds} 秒後再發送驗證信',
     signInTips: '歡迎來到 {appName}，請登入以繼續，若無帳號將自動為您註冊。',
+    noPermissionToSignIn: '您沒有權限訪問此賬戶。如果您認為這是一個錯誤，請聯繫管理員。',
+    error401Title: '未授權訪問',
+    error401Content: '您沒有權限訪問此頁面。請檢查您的登錄憑證，如果您認為這是一個錯誤，請聯繫管理員。',
   },
   admin: {
     userManagement: '用戶管理',

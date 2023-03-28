@@ -7,6 +7,7 @@ import { useLocalStorage } from '@vueuse/core'
 import { t } from '@/locales'
 import { validateEmail } from '@/utils/functions'
 import { FINISH_SIGN_IN_ROUTE } from '@/constants/routes'
+import { EMAIL_FOR_SIGN_IN, SEND_MAIL_WAIT_SECONDS } from '@/constants/storage'
 
 const ms = useMessage()
 
@@ -15,7 +16,7 @@ const email = ref('')
 const submitLoading = ref(false)
 const submitDisabled = computed(() => !validateEmail(email.value) || submitLoading.value)
 
-const sendMailWaitSeconds = useLocalStorage('sendMailWaitSeconds', 0)
+const sendMailWaitSeconds = useLocalStorage(SEND_MAIL_WAIT_SECONDS, 0)
 
 async function startWaitToSendMail(time: number) {
   sendMailWaitSeconds.value = time
@@ -44,9 +45,9 @@ async function SendLoginEmail() {
   try {
     submitLoading.value = true
     await sendSignInLinkToEmail(auth, email.value, actionCodeSettings)
-    window.localStorage.setItem('emailForSignIn', email.value)
+    window.localStorage.setItem(EMAIL_FOR_SIGN_IN, email.value)
     ms.success(t('auth.loginLinkSent'))
-    startWaitToSendMail(30)
+    startWaitToSendMail(15)
   }
   catch (e) {
     ms.error(`${t('auth.pleaseTryAgainLater')}`)
