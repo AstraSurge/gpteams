@@ -48,7 +48,7 @@ router.post('/verify', async (req, res) => {
     const Authorization = (req.header('Authorization') || '').replace('Bearer ', '').trim()
     const decodedToken = await admin.auth().verifyIdToken(Authorization)
 
-    if (!isAuthenticated(decodedToken)) {
+    if (!await isAuthenticated(decodedToken)) {
       res.status(401).send({
         status: 'Unauthorized',
         message: 'Auth Error',
