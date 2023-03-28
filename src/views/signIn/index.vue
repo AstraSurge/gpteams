@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NCheckbox, NDivider } from 'naive-ui'
+import { NButton, NCheckbox, NDivider, useMessage } from 'naive-ui'
 import { useFirebaseAuth } from 'vuefire'
 import { ref, watch } from 'vue'
 import { browserLocalPersistence, browserSessionPersistence } from '@firebase/auth'
@@ -10,12 +10,15 @@ import AuthLayout from '@/components/custom/AuthLayout.vue'
 import { useAppStore, useAuthStore } from '@/store'
 import { t } from '@/locales'
 import { router } from '@/router'
+import { verifyIdToken } from '@/api'
 
 interface Props {
   visible: boolean
 }
 
 defineProps<Props>()
+
+const ms = useMessage()
 
 const isUsingEmail = ref(false)
 const rememberMe = ref(false)
@@ -34,7 +37,13 @@ watch(() => rememberMe.value, (newRememberMe) => {
 })
 
 async function setToken(token: string) {
-  authStore.setToken(token)
+  const resp = await verifyIdToken(token)
+  if (resp.status !== 'Success')
+    ms.error(t('auth.noPermissionToSignIn'))
+  authStore.setAuthState({
+    ...resp.data,
+    token,
+  })
   router.replace('/')
 }
 

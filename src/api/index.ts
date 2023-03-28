@@ -1,6 +1,17 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
 import { deleteFn, get, post, put } from '@/utils/request'
 
+export function verifyIdToken(token: string) {
+  return post<{
+    role: 'admin' | 'user'
+  }>({
+    url: '/verify',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+}
+
 export function fetchChatAPI<T = any>(
   prompt: string,
   options?: { conversationId?: string; parentMessageId?: string },

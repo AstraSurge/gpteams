@@ -8,6 +8,7 @@ import { t } from '@/locales'
 import { router } from '@/router'
 import { validateEmail } from '@/utils/functions'
 import AuthLayout from '@/components/custom/AuthLayout.vue'
+import { verifyIdToken } from '@/api'
 
 const ms = useMessage()
 
@@ -37,7 +38,10 @@ async function handleLogin() {
   const token = await result.user.getIdToken()
 
   try {
-    authStore.setToken(token)
+    const resp = await verifyIdToken(token)
+    if (resp.status !== 'Success')
+      ms.error(t('auth.noPermissionToSignIn'))
+    authStore.setAuthState(resp.data)
   }
   catch {
     ms.error(t('auth.invalidEmailLinkOrExpired'))

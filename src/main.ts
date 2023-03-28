@@ -13,10 +13,6 @@ async function bootstrap() {
 
   setupScrollbarStyle()
 
-  setupStore(app)
-
-  setupI18n(app)
-
   app.use(VueFire, {
     firebaseApp,
     modules: [
@@ -24,6 +20,10 @@ async function bootstrap() {
       VueFireAuth(),
     ],
   })
+
+  await setupStore(app)
+
+  setupI18n(app)
 
   await setupRouter(app)
 

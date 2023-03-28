@@ -117,6 +117,9 @@ export default {
     returnToSignInPage: 'Return to sign-in page',
     waitSecondsToSendMail: 'Wait {seconds} seconds to send email',
     signInTips: 'Welcome to {appName}. Sign in to continue, or a new account will be created automatically.',
+    noPermissionToSignIn: 'You do not have permission to access this account. Please contact the administrator if you believe this is an error.',
+    error401Title: 'Unauthorized Access',
+    error401Content: 'You do not have permission to access this page. Please check your login credentials or contact the administrator if you believe this is an error.',
   },
   admin: {
     userManagement: 'User Management',
