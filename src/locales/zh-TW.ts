@@ -69,6 +69,7 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余額',
+    canNotBeEmpty: '不可為空',
   },
   store: {
     siderButton: '提示詞商店',

@@ -69,6 +69,7 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API Balance',
+    canNotBeEmpty: 'Can not be empty',
   },
   store: {
     siderButton: 'Prompt Store',
