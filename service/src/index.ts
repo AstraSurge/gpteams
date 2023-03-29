@@ -74,8 +74,6 @@ router.post('/verify', async (req, res) => {
   }
 })
 
-app.use('', router)
-app.use('', adminRouter)
 app.use('/api', router)
 app.use('/api', adminRouter)
 
