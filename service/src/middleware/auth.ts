@@ -14,6 +14,10 @@ export async function isAdmin(decodedToken: DecodedIdToken) {
 }
 
 export async function isAuthenticated(decodedToken: DecodedIdToken) {
+  // admin can access all
+  if (await isAdmin(decodedToken))
+    return true
+
   const adminConfig = await adminConfigRef.get()
 
   const whitelist = adminConfig?.data()?.whitelist ?? []
