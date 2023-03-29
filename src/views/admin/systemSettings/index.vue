@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NH2, NInput, NP, NSpin, useMessage } from 'naive-ui'
+import { NButton, NH2, NInput, NInputGroup, NP, NSelect, NSpin, useMessage } from 'naive-ui'
 import { onMounted, ref, watch } from 'vue'
 import TagsInput from './TagsInput.vue'
 import { t } from '@/locales'
@@ -8,6 +8,7 @@ import { useAdminStore } from '@/store'
 const localBlacklist = ref<string[]>([])
 const localWhitelist = ref<string[]>([])
 const openaiApiKey = ref('')
+const chatgptModel = ref('')
 
 const ms = useMessage()
 
@@ -47,15 +48,39 @@ async function handleSaveOpenaiApiKey() {
   }
 }
 
-watch(systemSettings.data, () => {
-  localBlacklist.value = systemSettings.data.blacklist || []
-  localWhitelist.value = systemSettings.data.whitelist || []
+async function handleSaveChatgptModel() {
+  try {
+    await updateSystemSettings({
+      chatgptModel: [chatgptModel.value],
+    })
+  }
+  catch (e) {
+    ms.error(t('auth.pleaseTryAgainLater'))
+  }
+}
+
+const chatgptModelOptions = [
+  {
+    label: 'GPT-3.5-turbo',
+    value: 'gpt-3.5-turbo',
+  },
+  {
+    label: 'GPT-4',
+    value: 'gpt-4',
+  },
+]
+
+watch(systemSettings.data, (data) => {
+  localBlacklist.value = data.blacklist || []
+  localWhitelist.value = data.whitelist || []
+  chatgptModel.value = data.chatgptModel?.[0] || 'gpt-3.5-turbo'
 })
 
 onMounted(async () => {
   await loadSystemSettings()
   localBlacklist.value = systemSettings.data.blacklist || []
   localWhitelist.value = systemSettings.data.whitelist || []
+  chatgptModel.value = systemSettings.data.chatgptModel?.[0] || 'gpt-3.5-turbo'
 })
 </script>
 
@@ -65,53 +90,53 @@ onMounted(async () => {
   </div>
   <div v-else class="flex flex-col gap-12 p-12">
     <div>
-      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700">
+      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureBlacklist") }}
       </NH2>
       <NP>
         {{ t("admin.configureBlacklistTips") }}
       </NP>
-      <div class="flex flex-nowrap gap-2">
+      <NInputGroup>
         <TagsInput v-model:value="localBlacklist" />
         <NButton
           class="w-32"
-          type="info"
+          type="primary"
           @click="handleSaveBlacklist"
         >
           {{ t("admin.update") }}
         </NButton>
-      </div>
+      </NInputGroup>
     </div>
     <div>
-      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700">
+      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureWhitelist") }}
       </NH2>
       <NP>
         {{ t("admin.configureWhitelistTips") }}
       </NP>
-      <div class="flex flex-nowrap gap-2">
+      <NInputGroup>
         <TagsInput v-model:value="localWhitelist" />
         <NButton
           class="w-32"
-          type="info"
+          type="primary"
           @click="handleSaveWhitelist"
         >
           {{ t("admin.update") }}
         </NButton>
-      </div>
+      </NInputGroup>
     </div>
     <div>
-      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700">
+      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureOpenaiApiKey") }}
       </NH2>
       <NP>
         {{ t("admin.configureOpenaiApiKeyTips") }}
       </NP>
-      <div class="flex flex-nowrap gap-2">
+      <NInputGroup>
         <NInput
           v-model:value="openaiApiKey"
           type="password"
-          class="max-w-2xl w-full"
+          class="max-w-2xl"
         />
         <NButton
           class="w-32"
@@ -120,7 +145,26 @@ onMounted(async () => {
         >
           {{ t("admin.update") }}
         </NButton>
-      </div>
+      </NInputGroup>
+    </div>
+    <div>
+      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
+        {{ t("admin.configureChatgptModel") }}
+      </NH2>
+      <NInputGroup>
+        <NSelect
+          v-model:value="chatgptModel"
+          :options="chatgptModelOptions"
+          class="max-w-2xl"
+        />
+        <NButton
+          type="primary"
+          class="w-32"
+          @click="handleSaveChatgptModel"
+        >
+          {{ t("admin.update") }}
+        </NButton>
+      </NInputGroup>
     </div>
   </div>
 </template>

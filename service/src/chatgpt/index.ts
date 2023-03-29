@@ -69,8 +69,13 @@ adminConfigRef.get().then((doc) => {
   }
 })
 
-export async function updateApiKey(apiKey: string) {
+export async function updateOpenaiApiKey(apiKey: string) {
   chatGptApiOptions.apiKey = apiKey
+  chatGptApi = new ChatGPTAPI(chatGptApiOptions)
+}
+
+export async function updateChatgptModel(model: string) {
+  chatGptApiOptions.completionParams.model = model
   chatGptApi = new ChatGPTAPI(chatGptApiOptions)
 }
 
