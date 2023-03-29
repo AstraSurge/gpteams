@@ -101,6 +101,7 @@ export interface SystemSettings {
   blacklist?: string[]
   whitelist?: string[]
   openaiApiKeys?: string[]
+  chatgptModel?: string[]
 }
 
 export function fetchSystemSettings<T = SystemSettings>() {

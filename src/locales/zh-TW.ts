@@ -155,6 +155,7 @@ export default {
     configureWhitelistTips: '白名單之外的用戶將無法登入，一行一個 Email，支援正規表達式。',
     configureOpenaiApiKey: '設定 OpenAI API Key',
     configureOpenaiApiKeyTips: '您的 OpenAI Key 將會被安全存儲，提交後不會再返回至客戶端。在這裡獲取您的 OpenAI API Key：https://beta.openai.com/account/api-keys',
+    configureChatgptModel: '設定 ChatGPT 模型',
     update: '更新',
     tagsInputPlaceholder: '輸入並按回車鍵添加',
   },

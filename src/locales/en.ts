@@ -155,6 +155,7 @@ export default {
     configureWhitelistTips: 'Users not in the whitelist will not be able to log in. One email per line, support regular expression.',
     configureOpenaiApiKey: 'Configure OpenAI API Key',
     configureOpenaiApiKeyTips: 'Your OpenAI Key will be securely stored and won\'t be returned to the client side after submission. Get your key from https://platform.openai.com/account/api-keys',
+    configureChatgptModel: 'Configure ChatGPT Model',
     update: 'Update',
     tagsInputPlaceholder: 'Enter and press Return to add',
   },

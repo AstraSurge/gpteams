@@ -1,5 +1,5 @@
 import express from 'express'
-import { updateApiKey } from '~/chatgpt'
+import { updateChatgptModel, updateOpenaiApiKey } from '~/chatgpt'
 import admin, { adminConfigRef } from '~/firebaseAdmin'
 import { checkAdmin, checkAuth } from '~/middleware/auth'
 import addToBlacklist from '~/utils/addToBlacklist'
@@ -30,7 +30,12 @@ adminRouter.put('/system-settings', async (req, res) => {
 
     if (configData?.openaiApiKeys?.length > 0) {
       const apiKey = configData.openaiApiKeys[0]
-      await updateApiKey(apiKey)
+      await updateOpenaiApiKey(apiKey)
+    }
+
+    if (configData?.chatgptModel?.length > 0) {
+      const model = configData.chatgptModel[0]
+      await updateChatgptModel(model)
     }
 
     await adminConfigRef.set(configData, { merge: true })
