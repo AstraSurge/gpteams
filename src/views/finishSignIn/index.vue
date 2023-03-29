@@ -45,7 +45,10 @@ async function handleLogin() {
 
   try {
     const resp = await verifyIdToken(token)
-    authStore.setAuthState(resp.data)
+    authStore.setAuthState({
+      token,
+      role: resp.data.role,
+    })
   }
   catch {
     ms.error(t('auth.noPermissionToSignIn'), {
