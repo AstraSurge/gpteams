@@ -44,6 +44,7 @@ const setGroupConfig = async () => {
 
   await firestore.collection('groups').add({
     isDefault: true,
+    operationPoints: 0,
   })
 }
 

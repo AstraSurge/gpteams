@@ -45,12 +45,24 @@ export class GroupLimits {
 
 const rateLimiterMiddleware = async (req, res, next) => {
   try {
-    const groupLimits = await GroupLimits.getInstance()
+    // admin bypass
+    if (res.locals.isAdmin) {
+      next()
+      return
+    }
     // TODO: update get userGroup logic in 1.1.0
     const userGroup = await groupModel.getDefaultGroup()
+    // if no limit, then bypass
+    if (!userGroup.operationPoints) {
+      next()
+      return
+    }
+
+    const groupLimits = await GroupLimits.getInstance()
     const groupLimit = groupLimits.get(userGroup.id)
+
     if (!groupLimit)
-      throw new Error('Group not found')
+      throw new Error('System Error')
     await groupLimit.consume(res.locals.uid)
     next()
   }
