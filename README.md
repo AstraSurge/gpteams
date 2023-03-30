@@ -5,7 +5,7 @@
 
 **通知**：已发布 `1.0.0-beta` 版本，详见 [更新日志](https://github.com/AstraSurge/gpteams/releases)。我们将在近期更新 1.0.0 正式版本，涵盖 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 所有 1.0.0 内容，并更新超详细的 wiki。
 
-[在线演示网站](https://gpteams.astrasurge.com) (只有 [Astra Surge](https://astrasurge.com) 成员的组织邮箱才能登录)
+[在线演示网站](https://gpteams.astrasurge.com) (~~只有 [Astra Surge](https://astrasurge.com) 成员的组织邮箱才能登录~~ 1.0.0-beta.3 新增了聊天次数限制功能，现在每小时可以进行 3 次对话了, 域名已被 DNS 污染)
 
 # GPTeams
 

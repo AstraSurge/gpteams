@@ -5,7 +5,7 @@
 
 **NOTICE**: Version `1.0.0-beta` has been released. For details, see the [Releases](https://github.com/AstraSurge/gpteams/releases)。We will be updating to the 1.0.0 official version soon, covering all 1.0.0 content in the Development Dashboard, and updating the highly detailed wiki as well。
 
-[Live demo](https://gpteams.astrasurge.com) (Only [Astra Surge](https://astrasurge.com) organization emails can log in.)
+[Live demo](https://gpteams.astrasurge.com) (~~Only [Astra Surge](https://astrasurge.com) organization emails can log in.~~ Version 1.0.0-beta.3 added a frequency limit feature, allowing only 3 conversations per hour.)
 
 # GPTeams
 
