@@ -44,6 +44,7 @@ const checkAuth = async (req, res, next) => {
     // if user is Admin, skip the rest of the auth process
     if (await isAdmin(decodedToken)) {
       res.locals.isAdmin = true
+      res.locals.uid = decodedToken.uid
       return next()
     }
 

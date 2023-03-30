@@ -26,4 +26,30 @@ adminConfigRef.get().then((doc) => {
   }
 })
 
+const setSystemConfig = async () => {
+  const doc = await adminConfigRef.get()
+  if (!doc.exists) {
+    await adminConfigRef.set({
+      whitelist: [],
+      blacklist: [],
+      openaiApiKeys: [],
+    })
+  }
+}
+
+const setGroupConfig = async () => {
+  const querySnapshot = await firestore.collection('groups').where('isDefault', '==', true).get()
+  if (querySnapshot.docs.length > 0)
+    return
+
+  await firestore.collection('groups').add({
+    isDefault: true,
+  })
+}
+
+export const initFirestore = async () => {
+  await setSystemConfig()
+  await setGroupConfig()
+}
+
 export default admin
