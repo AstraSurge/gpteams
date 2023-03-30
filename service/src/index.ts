@@ -5,7 +5,8 @@ import type { ChatContext, ChatMessage } from './chatgpt'
 import { chatReplyProcess } from './chatgpt'
 import { checkAuth, isAdmin, isAuthenticated } from './middleware/auth'
 import adminRouter from './routers/adminRouter'
-import admin from './firebaseAdmin'
+import admin, { initFirestore } from './firebaseAdmin'
+import rateLimiterMiddleware from './middleware/ratelimit'
 
 const app = express()
 const router = express.Router()
@@ -23,7 +24,7 @@ app.all('*', (_, res, next) => {
   next()
 })
 
-router.post('/chat-process', checkAuth, async (req, res) => {
+router.post('/chat-process', checkAuth, rateLimiterMiddleware, async (req, res) => {
   res.setHeader('Content-type', 'application/octet-stream')
 
   try {
@@ -77,4 +78,7 @@ router.post('/verify', async (req, res) => {
 app.use('/api', router)
 app.use('/api', adminRouter)
 
-app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+initFirestore().then(() => {
+  globalThis.console.log('Firestore initialized')
+  app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+})

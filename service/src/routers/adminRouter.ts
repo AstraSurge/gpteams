@@ -2,6 +2,7 @@ import express from 'express'
 import { updateChatgptModel, updateOpenaiApiKey } from '~/chatgpt'
 import admin, { adminConfigRef } from '~/firebaseAdmin'
 import { checkAdmin, checkAuth } from '~/middleware/auth'
+import groupModel from '~/model/groups'
 import addToBlacklist from '~/utils/addToBlacklist'
 
 const adminRouter = express.Router()
@@ -13,10 +14,16 @@ adminRouter.get('/system-settings', async (req, res) => {
     const configSnapshot = await adminConfigRef.get()
     const configData = configSnapshot.data()
     // remove openaiApiKeys from response for security reason
-    const { openaiApiKeys: _, ...rest } = configData ?? {}
+    const { openaiApiKeys: _, ...systemConfig } = configData ?? {}
+
+    const defaultRateLimits = (await groupModel.getDefaultGroup()).operationPoints
+
     res.status(200).json({
       status: 'Success',
-      data: rest,
+      data: {
+        ...systemConfig,
+        defaultRateLimits,
+      },
     } ?? {})
   }
   catch (error) {
@@ -36,6 +43,13 @@ adminRouter.put('/system-settings', async (req, res) => {
     if (configData?.chatgptModel?.length > 0) {
       const model = configData.chatgptModel[0]
       await updateChatgptModel(model)
+    }
+
+    if (configData?.defaultRateLimits) {
+      const { defaultRateLimits } = configData
+      await groupModel.updateGroup((await groupModel.getDefaultGroup()).id, {
+        operationPoints: defaultRateLimits,
+      })
     }
 
     await adminConfigRef.set(configData, { merge: true })
