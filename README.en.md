@@ -3,17 +3,19 @@
 </div>
 </br>
 
-**NOTICE**: Version `1.0.0-beta` has been released. For details, see the [development board](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197)。We will be updating to the 1.0.0 official version soon, covering all 1.0.0 content in the Development Dashboard, and updating the highly detailed wiki as well。
+**NOTICE**: Version `1.0.0-beta` has been released. For details, see the [Releases](https://github.com/AstraSurge/gpteams/releases)。We will be updating to the 1.0.0 official version soon, covering all 1.0.0 content in the Development Dashboard, and updating the highly detailed wiki as well。
 
 [Live demo](https://gpteams.astrasurge.com) (Only [Astra Surge](https://astrasurge.com) organization emails can log in.)
 
 # GPTeams
 
-![GPTeams Sign in Page](https://rorsch-1256426089.file.myqcloud.com/public/202303270444818.png)
+![GPTeams Sign in Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310623236.png)
 
-![GPteams User Management Page](https://rorsch-1256426089.file.myqcloud.com/public/202303270444757.png)
+![GPteams User Management Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310622849.png)
 
-![GPteams System Settings Page](https://rorsch-1256426089.file.myqcloud.com/public/202303270444643.png)
+![GPteams System Settings Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310623195.png)
+
+![GPTeams Chat Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310624399.png)
 
 GPTeams is a third-party client based on OpenAI API, customized for ChatGPT, providing team collaboration features not covered in the official OpenAI ChatGPT website.
 
@@ -22,7 +24,7 @@ GPTeams is a third-party client based on OpenAI API, customized for ChatGPT, pro
 1. Provides a completely free deployment solution using Firebase ~~and Vercel services~~(GPTeams cannot support Vercel's Hobby Plan because the limits of Vercel's Hobby Plan make it impossible to deploy GPTeams, we are currently looking for another platform that allows easy and free deployment of GPTeams.). The free quota is enough to meet the needs of small teams (to be implemented, already scheduled).
 2. Supports login through Google account, phone number, and email.
 3. Equipped with an admin interface for user management, including disabling users, delete users etc.
-4. System settings page, admin can set blacklist, whitelist, OpenAI API key, user traffic rules (user traffic rules setting to be implemented, already scheduled)
+4. System settings page, admin can set blacklist, whitelist, OpenAI API key, user traffic rules.
 - Users can choose to sync a local conversation to the cloud (to be implemented).
 - Users can share conversations with other members of the team (to be implemented).
 
