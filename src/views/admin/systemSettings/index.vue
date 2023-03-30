@@ -107,7 +107,7 @@ onMounted(async () => {
       <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureBlacklist") }}
       </NH2>
-      <NP>
+      <NP class="max-w-2xl w-full">
         {{ t("admin.configureBlacklistTips") }}
       </NP>
       <NInputGroup>
@@ -125,7 +125,7 @@ onMounted(async () => {
       <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureWhitelist") }}
       </NH2>
-      <NP>
+      <NP class="max-w-2xl w-full">
         {{ t("admin.configureWhitelistTips") }}
       </NP>
       <NInputGroup>
@@ -143,7 +143,7 @@ onMounted(async () => {
       <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureOpenaiApiKey") }}
       </NH2>
-      <NP>
+      <NP class="max-w-2xl w-full">
         {{ t("admin.configureOpenaiApiKeyTips") }}
       </NP>
       <NInputGroup>
@@ -185,6 +185,9 @@ onMounted(async () => {
       <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
         {{ t("admin.configureChatRateLimitPerHour") }}
       </NH2>
+      <NP class="max-w-2xl w-full">
+        {{ t("admin.configureChatRateLimitPerHourTips") }}
+      </NP>
       <NInputGroup>
         <NInputNumber
           v-model:value="defaultRateLimits"
