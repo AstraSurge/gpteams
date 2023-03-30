@@ -41,10 +41,10 @@ const checkAuth = async (req, res, next) => {
     const Authorization = (req.header('Authorization') || '').replace('Bearer ', '').trim()
     const decodedToken = await verifyToken(Authorization)
 
+    res.locals.uid = decodedToken.uid
     // if user is Admin, skip the rest of the auth process
     if (await isAdmin(decodedToken)) {
       res.locals.isAdmin = true
-      res.locals.uid = decodedToken.uid
       return next()
     }
 
