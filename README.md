@@ -3,17 +3,19 @@
 </div>
 </br>
 
-**通知**：已发布 `1.0.0-beta` 版本，详见 [1.0.0-beta 更新日志](https://github.com/AstraSurge/gpteams/releases/tag/v1.0.0-beta)。我们将在近期更新 1.0.0 正式版本，涵盖 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 所有 1.0.0 内容，并更新超详细的 wiki。
+**通知**：已发布 `1.0.0-beta` 版本，详见 [更新日志](https://github.com/AstraSurge/gpteams/releases)。我们将在近期更新 1.0.0 正式版本，涵盖 [开发看板](https://sharing.clickup.com/31625481/b/h/6-900200430791-2/756b82376fc8197) 所有 1.0.0 内容，并更新超详细的 wiki。
 
 [在线演示网站](https://gpteams.astrasurge.com) (只有 [Astra Surge](https://astrasurge.com) 成员的组织邮箱才能登录)
 
 # GPTeams
 
-![GPTeams 登录页面](https://rorsch-1256426089.file.myqcloud.com/public/202303270444818.png)
+![GPTeams Sign in Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310632157.png)
 
-![GPteams 用户管理页面](https://rorsch-1256426089.file.myqcloud.com/public/202303270444757.png)
+![GPteams User Management Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310634302.png)
 
-![GPteams 系统设置页面](https://rorsch-1256426089.file.myqcloud.com/public/202303270444643.png)
+![GPteams System Settings Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310632530.png)
+
+![GPTeams Chat Page](https://rorsch-1256426089.file.myqcloud.com/public/202303310632882.png)
 
 GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端，旨在为用户提供 OPEN AI 官方 ChatGPT 网站未涵盖的团队协作功能。
 
@@ -22,7 +24,7 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 1. 提供完全免费的部署方案，利用 Firebase ~~和 Vercel 服务进行部署~~(经过实践，GPTeams无法支持Vercel的免费版，因为Vercel的免费版对 Serverless 函数的个数限制太低，而 GPTeams 计划日后添加更多好用的服务，Vercel的免费版不是长久之计，我们正在寻找另外一个可以轻松且免费部署 GPTeams 的平台)，免费额度足以满足小型团队需求（待实现，已排期）。
 2. 支持通过 Google 账户登录、电话号码登录以及电子邮箱登录。
 3. 设有管理员界面以便于管理用户，包括禁用/启用用户，删除用户等功能。
-4. 系统设置页面，可以设置系统黑名单，白名单，OpenAI API Key，流量限制规则。（流量限制规则的配置待实现，已排期）。
+4. 系统设置页面，可以设置系统黑名单，白名单，OpenAI API Key，流量限制规则。
 5. 用户可选择将本地某个会话同步至云端（待实现）。
 6. 用户可将会话分享给团队中的其他成员（待实现）。
 
