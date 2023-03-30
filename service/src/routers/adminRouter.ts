@@ -45,7 +45,7 @@ adminRouter.put('/system-settings', async (req, res) => {
       await updateChatgptModel(model)
     }
 
-    if (configData?.defaultRateLimits) {
+    if (typeof configData?.defaultRateLimits === 'number') {
       const { defaultRateLimits } = configData
       await groupModel.updateGroup((await groupModel.getDefaultGroup()).id, {
         operationPoints: defaultRateLimits,

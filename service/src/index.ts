@@ -6,7 +6,7 @@ import { chatReplyProcess } from './chatgpt'
 import { checkAuth, isAdmin, isAuthenticated } from './middleware/auth'
 import adminRouter from './routers/adminRouter'
 import admin, { initFirestore } from './firebaseAdmin'
-import rateLimiterMiddleware from './middleware/ratelimit'
+import rateLimiterMiddleware from './middleware/rateLimiter'
 
 const app = express()
 const router = express.Router()
