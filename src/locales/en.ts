@@ -157,6 +157,7 @@ export default {
     configureOpenaiApiKeyTips: 'Your OpenAI Key will be securely stored and won\'t be returned to the client side after submission. Get your key from https://platform.openai.com/account/api-keys',
     configureChatgptModel: 'ChatGPT Model',
     configureChatRateLimitPerHour: 'Chat Rate Limit Per Hour',
+    configureChatRateLimitPerHourTips: 'The number of chats per hour for each user except for the administrator. 0 means no limit.',
     update: 'Update',
     tagsInputPlaceholder: 'Enter and press Return to add',
   },
