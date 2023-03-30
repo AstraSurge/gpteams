@@ -158,5 +158,6 @@ export default {
     configureChatgptModel: '設定 ChatGPT 模型',
     update: '更新',
     tagsInputPlaceholder: '輸入並按回車鍵添加',
+    configureChatRateLimitPerHour: '設定每小時聊天限制',
   },
 }

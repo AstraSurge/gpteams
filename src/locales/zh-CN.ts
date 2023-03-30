@@ -156,6 +156,7 @@ export default {
     configureOpenaiApiKey: '配置 OpenAI API Key',
     configureOpenaiApiKeyTips: '您的 OpenAI Key 将会被安全存储，提交后不会再返回至客户端，在这里获取您的 OpenAI Key：https://platform.openai.com/account/api-keys',
     configureChatgptModel: '配置 ChatGPT 模型',
+    configureChatRateLimitPerHour: '配置每小时聊天限制',
     update: '更新',
     tagsInputPlaceholder: '输入并按回车键添加',
   },
