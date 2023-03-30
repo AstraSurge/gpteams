@@ -58,7 +58,7 @@ const appName = import.meta.env.VITE_APP_NAME
 
 <template>
   <AuthLayout>
-    <div class="px-4 bg-white rounded dark:bg-slate-800 w-full max-w-lg">
+    <div class="px-4 rounded w-full max-w-lg">
       <header class="mb-8 text-center">
         <h1 class="text-4xl md:text-5xl font-bold text-slate-700 dark:text-slate-100">
           {{ t('auth.welcomeBack') }}
