@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NH2, NInput, NInputGroup, NP, NSelect, NSpin, useMessage } from 'naive-ui'
+import { NButton, NH2, NInput, NInputGroup, NInputNumber, NP, NSelect, NSpin, useMessage } from 'naive-ui'
 import { onMounted, ref, watch } from 'vue'
 import TagsInput from './TagsInput.vue'
 import { t } from '@/locales'
@@ -9,6 +9,7 @@ const localBlacklist = ref<string[]>([])
 const localWhitelist = ref<string[]>([])
 const openaiApiKey = ref('')
 const chatgptModel = ref('')
+const defaultRateLimits = ref(0)
 
 const ms = useMessage()
 
@@ -59,6 +60,17 @@ async function handleSaveChatgptModel() {
   }
 }
 
+async function handleSaveChatRateLimitPerHour() {
+  try {
+    await updateSystemSettings({
+      defaultRateLimits: defaultRateLimits.value,
+    })
+  }
+  catch (e) {
+    ms.error(t('auth.pleaseTryAgainLater'))
+  }
+}
+
 const chatgptModelOptions = [
   {
     label: 'GPT-3.5-turbo',
@@ -74,6 +86,7 @@ watch(systemSettings.data, (data) => {
   localBlacklist.value = data.blacklist || []
   localWhitelist.value = data.whitelist || []
   chatgptModel.value = data.chatgptModel?.[0] || 'gpt-3.5-turbo'
+  defaultRateLimits.value = data.defaultRateLimits || 0
 })
 
 onMounted(async () => {
@@ -81,6 +94,7 @@ onMounted(async () => {
   localBlacklist.value = systemSettings.data.blacklist || []
   localWhitelist.value = systemSettings.data.whitelist || []
   chatgptModel.value = systemSettings.data.chatgptModel?.[0] || 'gpt-3.5-turbo'
+  defaultRateLimits.value = systemSettings.data.defaultRateLimits || 0
 })
 </script>
 
@@ -161,6 +175,25 @@ onMounted(async () => {
           type="primary"
           class="w-32"
           @click="handleSaveChatgptModel"
+        >
+          {{ t("admin.update") }}
+        </NButton>
+      </NInputGroup>
+    </div>
+
+    <div>
+      <NH2 prefix="bar" class="text-2xl font-bold text-slate-700 dark:text-slate-200">
+        {{ t("admin.configureChatRateLimitPerHour") }}
+      </NH2>
+      <NInputGroup>
+        <NInputNumber
+          v-model:value="defaultRateLimits"
+          class="max-w-2xl w-full"
+        />
+        <NButton
+          type="primary"
+          class="w-32"
+          @click="handleSaveChatRateLimitPerHour"
         >
           {{ t("admin.update") }}
         </NButton>

@@ -102,6 +102,7 @@ export interface SystemSettings {
   whitelist?: string[]
   openaiApiKeys?: string[]
   chatgptModel?: string[]
+  defaultRateLimits?: number
 }
 
 export function fetchSystemSettings<T = SystemSettings>() {
