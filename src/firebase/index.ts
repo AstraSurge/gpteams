@@ -1,12 +1,21 @@
 import { initializeApp } from 'firebase/app'
+import type { App } from 'vue'
+import { VueFire, VueFireAuth } from 'vuefire'
+import { getFirebaseConfig } from '@/api'
 // ... other firebase imports
 
-export const firebaseApp = initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-})
+export const initialFirebaseApp = async () => {
+  const data = await getFirebaseConfig()
+  return initializeApp(data)
+}
+
+export const setupFirebase = async (app: App) => {
+  const firebaseApp = await initialFirebaseApp()
+  app.use(VueFire, {
+    firebaseApp,
+    modules: [
+      // ... other modules
+      VueFireAuth(),
+    ],
+  })
+}

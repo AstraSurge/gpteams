@@ -11,9 +11,6 @@ import rateLimiterMiddleware from './middleware/rateLimiter'
 const app = express()
 const router = express.Router()
 
-app.use(history({
-  index: '/',
-}))
 app.use(express.static('public'))
 app.use(express.json())
 
@@ -75,10 +72,32 @@ router.post('/verify', async (req, res) => {
   }
 })
 
+router.get('/firebase-config', async (_, res) => {
+  res.status(200).send({
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  })
+})
+
 app.use('/api', router)
 app.use('/api', adminRouter)
+app.use(history({
+  index: '/',
+}))
 
 initFirestore().then(() => {
   globalThis.console.log('Firestore initialized')
-  app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+  let port = 3002
+  if (process.env.PORT) {
+    if (!/^\d+$/.test(process.env.PORT))
+      globalThis.console.error(`Warning: Invalid port number "${process.env.PORT}". Using default port 3000 instead.`)
+    else
+      port = parseInt(process.env.PORT)
+  }
+  app.listen(port, '0.0.0.0', () => globalThis.console.log(`Server is running on port ${port}`))
 })
