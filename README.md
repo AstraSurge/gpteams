@@ -34,31 +34,29 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 
 ### 环境变量
 
-#### 前端环境变量
+#### 编译期环境变量
+
+- `VITE_APP_NAME`(可选设置)：应用名称，你可以将其更改为你想要的名称。修改后，名称会在各个地方（例如 HTML 标题、登录界面等）显示。
+
+#### 运行时环境变量
 
 以下变量是必需设置的，你可以在 [Firebase 官方文档](https://firebase.google.com/docs/web/setup?hl=zh-cn) 中获取 Firebase 项目配置信息：
+```
+FIREBASE_API_KEY
+FIREBASE_AUTH_DOMAIN
+FIREBASE_PROJECT_ID
+FIREBASE_STORAGE_BUCKET
+FIREBASE_MESSAGING_SENDER_ID
+FIREBASE_APP_ID
+FIREBASE_MEASUREMENT_ID
+```
+- `ROOT_ACCOUNT`(必需): 系统管理员账号，如果你通过 google 登录，那这里填 google 账号对应的邮箱。注意，如果你通过电话号码登录，这里需要填写你的**国家呼叫代码+电话号码**，如 `+8613498888888`。
 
-- `VITE_FIREBASE_API_KEY`
-- `VITE_FIREBASE_AUTH_DOMAIN`
-- `VITE_FIREBASE_PROJECT_ID`
-- `VITE_FIREBASE_STORAGE_BUCKET`
-- `VITE_FIREBASE_MESSAGING_SENDER_ID`
-- `VITE_FIREBASE_APP_ID`
-- `VITE_FIREBASE_MEASUREMENT_ID`
-
-以下变量是可选设置的：
-
-- `VITE_APP_NAME`：应用名称，你可以将其更改为你想要的名称。修改后，名称会在各个地方（例如 HTML 标题、登录界面等）显示。
-
-#### 后端环境变量
-
-以下变量是必需设置的：
-
-- `ROOT_ACCOUNT`: 系统管理员账号，如果你通过 google 登录，那这里填 google 账号对应的邮箱。注意，如果你通过电话号码登录，这里需要填写你的**国家呼叫代码+电话号码**，如 `+8613498888888`。
-
-- `GOOGLE_APPLICATION_CREDENTIALS_JSON`：JSON 字符串格式的私钥文件, 必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
+- `GOOGLE_APPLICATION_CREDENTIALS_JSON`(必需): JSON 字符串格式的私钥文件, 必需。请查看 [Firebase 官方文档](https://firebase.google.com/docs/admin/setup?hl=zh-cn) 获取该信息。示例:
 `
 '{"type": "service_account", "project_id": "xxx", "private_key_id": "xxx", "private_key": "xxx", "client_email": "xxx", "client_id": "xxx", "auth_uri": "https://accounts.google.com/o/oauth2/auth", "token_uri": "https://oauth2.googleapis.com/token", "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs", "client_x509_cert_url": "xxx"}'`
+
+- `PORT`(可选): 服务端口
 
 其他变量请参阅 [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) 原项目的 README。
 
@@ -66,9 +64,9 @@ GPTeams 是一个专为 ChatGPT 定制的基于 OpenAI API 的第三方客户端
 
 ### 使用 docker 部署
 
-1. 将上文获取的**前端环境变量**填入 `.env` 中。
+1. 将上文你想要设置的**编译期环境变量**填入 `.env` 中。
 2. 构建 Docker 镜像：`sudo docker build -t gpteams .`
-3. 运行 GPTeams 容器，注意将其中的变量替换为上文说明的后端环境变量：`sudo docker run --name gpteams -d -p 8000:3002 GOOGLE_APPLICATION_CREDENTIALS_JSON='XXXX' gpteams`
+3. 将上文的运行时环境变量填写到 `env.list` 文件中用来注入运行时环境变量，启动：`sudo docker run --name gpteams -d -p 8000:3002 --env-file env.list gpteams`
 
 ## 鸣谢
 
