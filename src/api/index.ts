@@ -1,4 +1,6 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
+import type { FirebaseOptions } from 'firebase/app'
+import axios from 'axios'
 import { deleteFn, get, post, put } from '@/utils/request'
 
 export function verifyIdToken(token: string) {
@@ -116,4 +118,12 @@ export function updateSystemSettings<T = SystemSettings>(data: T) {
     url: '/system-settings',
     data,
   })
+}
+
+export async function getFirebaseConfig<T = FirebaseOptions>() {
+  const service = axios.create({
+    baseURL: import.meta.env.VITE_GLOB_API_URL,
+  })
+  const resp = await service.get('/firebase-config/')
+  return resp.data as T
 }
