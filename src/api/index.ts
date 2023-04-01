@@ -124,6 +124,10 @@ export async function getFirebaseConfig<T = FirebaseOptions>() {
   const service = axios.create({
     baseURL: import.meta.env.VITE_GLOB_API_URL,
   })
-  const resp = await service.get('/firebase-config/')
+  const resp = await service.get('/firebase-config', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
   return resp.data as T
 }

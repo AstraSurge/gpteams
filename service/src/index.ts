@@ -11,7 +11,6 @@ import rateLimiterMiddleware from './middleware/rateLimiter'
 const app = express()
 const router = express.Router()
 
-app.use(express.static('public'))
 app.use(express.json())
 
 app.all('*', (_, res, next) => {
@@ -84,11 +83,11 @@ router.get('/firebase-config', async (_, res) => {
   })
 })
 
+app.use(history())
+app.use(express.static('public'))
+
 app.use('/api', router)
 app.use('/api', adminRouter)
-app.use(history({
-  index: '/',
-}))
 
 initFirestore().then(() => {
   globalThis.console.log('Firestore initialized')
