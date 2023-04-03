@@ -23,7 +23,7 @@ async function handleLogout() {
 <template>
   <HoverButton :tooltip="$t('auth.logout')" @click="handleLogout">
     <span class="text-xl text-[#4f555e] dark:text-white">
-      <SvgIcon icon="ri:logout-box-line" />
+      <SvgIcon icon="ri:logout-circle-r-line" />
     </span>
   </HoverButton>
 </template>
