@@ -52,6 +52,8 @@ export default {
   },
   setting: {
     setting: '设置',
+    userCenter: '用户中心',
+    adminCenter: '管理员中心',
     general: '总览',
     advanced: '高级',
     config: '配置',

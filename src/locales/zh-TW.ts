@@ -52,6 +52,8 @@ export default {
   },
   setting: {
     setting: '設定',
+    userCenter: '使用者中心',
+    adminCenter: '管理員中心',
     general: '總覽',
     advanced: '高級',
     config: '設定',

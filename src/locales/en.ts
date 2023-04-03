@@ -52,6 +52,8 @@ export default {
   },
   setting: {
     setting: 'Setting',
+    userCenter: 'User Center',
+    adminCenter: 'Admin Center',
     general: 'General',
     advanced: 'Advanced',
     config: 'Config',
