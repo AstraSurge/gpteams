@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, nextTick } from 'vue'
+import { computed, defineAsyncComponent, nextTick } from 'vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
 
@@ -8,7 +8,6 @@ interface Props {
 }
 
 interface Emit {
-  (ev: 'export'): void
   (ev: 'toggleUsingContext'): void
 }
 
@@ -32,13 +31,11 @@ function onScrollToTop() {
     nextTick(() => scrollRef.scrollTop = 0)
 }
 
-function handleExport() {
-  emit('export')
-}
-
 function toggleUsingContext() {
   emit('toggleUsingContext')
 }
+
+const ExportButton = defineAsyncComponent(() => import('../ExportButton.vue'))
 </script>
 
 <template>
@@ -67,11 +64,7 @@ function toggleUsingContext() {
             <SvgIcon icon="ri:chat-history-line" />
           </span>
         </HoverButton>
-        <HoverButton @click="handleExport">
-          <span class="text-xl text-[#4f555e] dark:text-white">
-            <SvgIcon icon="ri:download-2-line" />
-          </span>
-        </HoverButton>
+        <ExportButton />
       </div>
     </div>
   </header>

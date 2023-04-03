@@ -2,15 +2,13 @@ import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import { setupPageGuard } from './permission'
-import { ChatLayout } from '@/views/chat/layout'
-import AdminLayout from '@/views/admin/layout/index.vue'
 import { FINISH_SIGN_IN_ROUTE } from '@/constants/routes'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Root',
-    component: ChatLayout,
+    component: () => import('@/views/chat/layout/Layout.vue'),
     redirect: '/chat',
     meta: {
       requiresAuth: true,
@@ -36,7 +34,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/admin',
     name: 'Admin',
-    component: AdminLayout,
+    component: () => import('@/views/admin/layout/index.vue'),
     redirect: '/admin/user-management',
     meta: {
       requiresAdmin: true,
