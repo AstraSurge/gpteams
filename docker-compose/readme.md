@@ -12,3 +12,4 @@
   # 结束运行
   docker-compose down
   ```
+**注意，目前暂时没有精力官方支持 docker-compose 部署方式，每次的更新涉及到 docker-compose 的部分会同步修改，但是不会去测试**
