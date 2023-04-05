@@ -1,3 +1,5 @@
+ARG VITE_APP_NAME
+ARG VITE_GLOB_OPEN_LONG_REPLY
 # build front-end
 FROM node:lts-alpine AS frontend
 
@@ -11,6 +13,8 @@ RUN yarn --frozen-lockfile
 
 COPY . /app
 
+ARG VITE_APP_NAME
+ARG VITE_GLOB_OPEN_LONG_REPLY
 RUN yarn build
 
 # build backend
