@@ -26,6 +26,9 @@ export default {
     failed: '操作失败',
     verify: '验证',
     goToHomepage: '返回首页',
+    more: '更多',
+    avatarAlt: '{name} 的头像',
+    toggleSider: '切换侧边栏',
   },
   chat: {
     newChatButton: '新建聊天',
@@ -49,6 +52,8 @@ export default {
     clearHistoryConfirm: '确定清空聊天记录?',
     preview: '预览',
     showRawText: '显示原文',
+    regenerate: '重新生成',
+    send: '发送',
   },
   setting: {
     setting: '设置',
@@ -162,5 +167,7 @@ export default {
     configureChatRateLimitPerHourTips: '普通用户每小时限制的聊天次数，0 为不限制',
     update: '更新',
     tagsInputPlaceholder: '输入并按回车键添加',
+    countryCallingCode: '国家区号',
+    searchCountryCallingCode: '搜索国家区号',
   },
 }

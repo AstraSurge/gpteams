@@ -26,6 +26,9 @@ export default {
     failed: '操作失敗',
     verify: '驗證',
     goToHomepage: '返回首頁',
+    more: '更多',
+    avatarAlt: '{name} 的頭像',
+    toggleSider: '切換側邊欄',
   },
   chat: {
     newChatButton: '新建對話',
@@ -49,6 +52,8 @@ export default {
     clearHistoryConfirm: '確定清除紀錄?',
     preview: '預覽',
     showRawText: '顯示原文',
+    regenerate: '重新生成',
+    send: '發送',
   },
   setting: {
     setting: '設定',
@@ -162,5 +167,7 @@ export default {
     configureChatRateLimitPerHourTips: '普通用戶每小時限制的聊天次數，0 表示不限制',
     update: '更新',
     tagsInputPlaceholder: '輸入並按回車鍵添加',
+    countryCallingCode: '國碼',
+    searchCountryCallingCode: '搜尋國碼',
   },
 }

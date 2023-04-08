@@ -2,6 +2,7 @@
 import { NAvatar } from 'naive-ui'
 import { useCurrentUser } from 'vuefire'
 import { isString } from '@/utils/is'
+import { t } from '@/locales'
 
 const user = useCurrentUser()
 </script>
@@ -14,10 +15,11 @@ const user = useCurrentUser()
           size="large"
           round
           :src="user?.photoURL"
+          :img-props="{ alt: t('common.avatarAlt', { name: user?.displayName }) }"
         />
       </template>
       <template v-else>
-        <NAvatar size="large" round />
+        <NAvatar size="large" round :img-props="{ alt: t('common.avatarAlt', { name: user?.displayName }) }" />
       </template>
     </div>
     <div class="flex-1 min-w-0 ml-2">

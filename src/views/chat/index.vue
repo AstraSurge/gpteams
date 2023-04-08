@@ -475,13 +475,13 @@ const Message = defineAsyncComponent(() => import('./components/Message/index.vu
     <footer :class="footerClass">
       <div class="w-full max-w-screen-xl m-auto">
         <div class="flex items-center justify-between space-x-2">
-          <HoverButton @click="handleClear">
+          <HoverButton :tooltip="t('chat.clearChat')" @click="handleClear">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:delete-bin-line" />
             </span>
           </HoverButton>
           <ExportButton v-if="!isMobile" />
-          <HoverButton v-if="!isMobile" @click="toggleUsingContext">
+          <HoverButton v-if="!isMobile" :tooltip="t('chat.usingContext')" @click="toggleUsingContext">
             <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
               <SvgIcon icon="ri:chat-history-line" />
             </span>
@@ -501,7 +501,7 @@ const Message = defineAsyncComponent(() => import('./components/Message/index.vu
               />
             </template>
           </NAutoComplete>
-          <NButton type="primary" :disabled="buttonDisabled" @click="handleSubmit">
+          <NButton :aria-label="t('chat.send')" type="primary" :disabled="buttonDisabled" @click="handleSubmit">
             <template #icon>
               <span class="dark:text-black">
                 <SvgIcon icon="ri:send-plane-fill" />

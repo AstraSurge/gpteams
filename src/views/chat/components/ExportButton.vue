@@ -49,7 +49,7 @@ function handleExport() {
 </script>
 
 <template>
-  <HoverButton @click="handleExport">
+  <HoverButton :aria-label="t('chat.exportImage')" :tooltip="t('chat.exportImage')" @click="handleExport">
     <span class="text-xl text-[#4f555e] dark:text-white">
       <SvgIcon icon="ri:download-2-line" />
     </span>

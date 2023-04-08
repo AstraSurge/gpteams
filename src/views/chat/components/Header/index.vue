@@ -2,6 +2,7 @@
 import { computed, defineAsyncComponent, nextTick } from 'vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
+import { t } from '@/locales'
 
 interface Props {
   usingContext: boolean
@@ -45,6 +46,7 @@ const ExportButton = defineAsyncComponent(() => import('../ExportButton.vue'))
     <div class="relative flex items-center justify-between min-w-0 overflow-hidden h-14">
       <div class="flex items-center">
         <button
+          :aria-label="t('common.toggleSider')"
           class="flex items-center justify-center w-11 h-11"
           @click="handleUpdateCollapsed"
         >
@@ -59,7 +61,7 @@ const ExportButton = defineAsyncComponent(() => import('../ExportButton.vue'))
         {{ currentChatHistory?.title ?? '' }}
       </h1>
       <div class="flex items-center space-x-2">
-        <HoverButton @click="toggleUsingContext">
+        <HoverButton :tooltip="t('chat.usingContext')" @click="toggleUsingContext">
           <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
             <SvgIcon icon="ri:chat-history-line" />
           </span>

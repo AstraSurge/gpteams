@@ -33,7 +33,7 @@ const createColumns = ({
           size: 'small',
           src: row.photoURL,
           imgProps: {
-            alt: row.displayName,
+            alt: t('common.avatarAlt', { name: row.displayName }),
           },
         },
       ),

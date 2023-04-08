@@ -38,7 +38,7 @@ onMounted(() => {
 
 <template>
   <NInputGroup>
-    <NSelect v-model:value="callingCode" :style="{ width: '96px' }" :consistent-menu-width="false" placeholder="calling Code" filterable :options="options" />
+    <NSelect v-model:value="callingCode" :aria-label="t('admin.countryCallingCode')" :input-props="{ ['aria-label']: t('admin.searchCountryCallingCode') }" :style="{ width: '96px' }" :consistent-menu-width="false" filterable :options="options" />
     <NInput v-model:value="phoneNumber" :placeholder="t('auth.phoneNumber')" />
   </NInputGroup>
 </template>
