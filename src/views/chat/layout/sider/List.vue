@@ -1,9 +1,10 @@
 <script setup lang='ts'>
 import { computed } from 'vue'
 import { NInput, NPopconfirm, NScrollbar } from 'naive-ui'
-import { SvgIcon } from '@/components/common'
+import { HoverButton, SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
+import { t } from '@/locales'
 
 const { isMobile } = useBasicLayout()
 
@@ -59,8 +60,8 @@ function isActive(uuid: number) {
       <template v-else>
         <div v-for="(item, index) of dataSources" :key="index">
           <a
-            class="relative flex items-center gap-3 px-3 py-3 break-all border rounded-md cursor-pointer hover:bg-neutral-100 group dark:border-neutral-800 dark:hover:bg-[#24272e]"
-            :class="isActive(item.uuid) && ['border-[#4b9e5f]', 'bg-neutral-100', 'text-[#4b9e5f]', 'dark:bg-[#24272e]', 'dark:border-[#4b9e5f]', 'pr-14']"
+            class="relative flex items-center gap-3 px-3 py-3 break-all border rounded-md cursor-pointer hover:bg-slate-50 group dark:border-neutral-800 dark:hover:bg-[#24272e]"
+            :class="isActive(item.uuid) && ['border-[#4b9e5f]', 'bg-slate-50', 'text-green-800', 'dark:text-white', 'dark:bg-[#24272e]', 'dark:border-[#4b9e5f]', 'pr-14']"
             @click="handleSelect(item)"
           >
             <span>
@@ -77,19 +78,19 @@ function isActive(uuid: number) {
             </div>
             <div v-if="isActive(item.uuid)" class="absolute z-10 flex visible right-1">
               <template v-if="item.isEdit">
-                <button class="p-1" @click="handleEdit(item, false, $event)">
+                <HoverButton :tooltip="t('common.save')" class="p-1" @click="handleEdit(item, false, $event)">
                   <SvgIcon icon="ri:save-line" />
-                </button>
+                </HoverButton>
               </template>
               <template v-else>
-                <button class="p-1">
+                <HoverButton :tooltip="t('common.edit')" class="p-1">
                   <SvgIcon icon="ri:edit-line" @click="handleEdit(item, true, $event)" />
-                </button>
+                </HoverButton>
                 <NPopconfirm placement="bottom" @positive-click="handleDelete(index, $event)">
                   <template #trigger>
-                    <button class="p-1">
+                    <HoverButton :tooltip="t('common.delete')" class="p-1">
                       <SvgIcon icon="ri:delete-bin-line" />
-                    </button>
+                    </HoverButton>
                   </template>
                   {{ $t('chat.deleteHistoryConfirm') }}
                 </NPopconfirm>

@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { NAvatar } from 'naive-ui'
 import { useCurrentUser } from 'vuefire'
 import { isString } from '@/utils/is'
+import { t } from '@/locales'
 
 interface Props {
   image?: boolean
@@ -16,7 +17,7 @@ const avatar = computed(() => user.value?.photoURL)
 
 <template>
   <template v-if="image">
-    <NAvatar v-if="isString(avatar) && avatar.length > 0" :src="avatar" />
+    <NAvatar v-if="isString(avatar) && avatar.length > 0" :src="avatar" :img-props="{ alt: t('admin.avatar') }" />
   </template>
   <span v-else class="text-[28px] dark:text-white">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" width="1em" height="1em">

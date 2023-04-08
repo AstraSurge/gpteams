@@ -94,7 +94,7 @@ const TextComponent = defineAsyncComponent(() => import('./Text.vue'))
       <AvatarComponent :image="inversion" />
     </div>
     <div class="overflow-hidden text-sm " :class="[inversion ? 'items-end' : 'items-start']">
-      <p class="text-xs text-[#b4bbc4]" :class="[inversion ? 'text-right' : 'text-left']">
+      <p class="text-xs text-gray-600 dark:text-gray-300" :class="[inversion ? 'text-right' : 'text-left']">
         {{ dateTime }}
       </p>
       <div
@@ -112,6 +112,7 @@ const TextComponent = defineAsyncComponent(() => import('./Text.vue'))
         <div class="flex flex-col">
           <button
             v-if="!inversion"
+            :aria-label="t('chat.regenerate')"
             class="mb-2 transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-300"
             @click="handleRegenerate"
           >
@@ -123,7 +124,7 @@ const TextComponent = defineAsyncComponent(() => import('./Text.vue'))
             :options="options"
             @select="handleSelect"
           >
-            <button class="transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200">
+            <button :aria-label="t('common.more')" class="transition text-neutral-300 hover:text-neutral-800 dark:hover:text-neutral-200">
               <SvgIcon icon="ri:more-2-fill" />
             </button>
           </NDropdown>

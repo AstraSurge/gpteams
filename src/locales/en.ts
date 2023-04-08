@@ -26,6 +26,9 @@ export default {
     failed: 'Failed',
     verify: 'Verify',
     goToHomepage: 'Go to Homepage',
+    more: 'More',
+    avatarAlt: '{name}\'s avatar',
+    toggleSider: 'Toggle Sider',
   },
   chat: {
     newChatButton: 'New Chat',
@@ -49,6 +52,8 @@ export default {
     clearHistoryConfirm: 'Are you sure to clear chat history?',
     preview: 'Preview',
     showRawText: 'Show as raw Text',
+    regenerate: 'Regenerate',
+    send: 'Send',
   },
   setting: {
     setting: 'Setting',
@@ -162,5 +167,7 @@ export default {
     configureChatRateLimitPerHourTips: 'The number of chats per hour for each user except for the administrator. 0 means no limit.',
     update: 'Update',
     tagsInputPlaceholder: 'Enter and press Return to add',
+    countryCallingCode: 'Country Calling Code',
+    searchCountryCallingCode: 'Search Country Calling Code',
   },
 }
