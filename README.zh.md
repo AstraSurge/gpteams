@@ -3,7 +3,9 @@
 </div>
 </br>
 
-**NOTICE**: 本项目采用了 Firebase Authentication，由于中国大陆用户无法使用，我们建议中国大陆用户关注以下项目：https://github.com/gouguoyin/chatgpt-web
+**NOTICE**: 本项目采用了 Firebase Authentication，由于中国大陆用户无法使用，我们建议中国大陆用户关注以下项目：
+1. https://github.com/gouguoyin/chatgpt-web (非开源项目)
+2. https://github.com/Kerwin1202/chatgpt-web
 
 [在线演示网站](https://gpteams.astrasurge.com) (每小时可以进行 3 次对话, 域名已被 DNS 污染)
 
