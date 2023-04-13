@@ -37,3 +37,6 @@ stats.html
 .env.sh
 .env.ps1
 env.list
+
+# pwa development
+dev-dist
